@@ -1,0 +1,11 @@
+# ninja log v5
+336	644	7341150797767925	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	7d3d458a86a14d71
+647	1246	7341150801790076	D:/UnityProject/Phigros_Sim/Library/PramData/AndroidApplicationController/Cache/com.NuanR_Mxi.PhiSim/gradle-project/unityLibrary/build/intermediates/cxx/Debug/4d513qzs/obj/armeabi-v7a/libswappywrapper.so	15533a6d352f629a
+43	1671	7341150807971904	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	cb96f4c0fd5c524f
+129	1779	7341150809009516	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	9ac51e9489c75408
+174	1803	7341150809250331	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	1d20bfa9ff4df2f3
+85	1827	7341150809479229	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	12b49ca4df726af0
+2	1919	7341150810445505	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	da3444d58bb7f5ad
+278	1946	7341150810762633	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c56c90ee2e703bf
+224	2078	7341150812055875	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	c33a2bbc86f305d
+2078	2427	7341150814362012	D:/UnityProject/Phigros_Sim/Library/PramData/AndroidApplicationController/Cache/com.NuanR_Mxi.PhiSim/gradle-project/unityLibrary/build/intermediates/cxx/Debug/4d513qzs/obj/armeabi-v7a/libgame.so	bfcdfd9ff8018aee

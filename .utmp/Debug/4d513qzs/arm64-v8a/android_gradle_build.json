@@ -1,0 +1,47 @@
+{
+  "buildFiles": [
+    "D:\\UnityProject\\Phigros_Sim\\Library\\PramData\\AndroidApplicationController\\Cache\\com.NuanR_Mxi.PhiSim\\gradle-project\\unityLibrary\\src\\main\\cpp\\CMakeLists.txt",
+    "D:\\UnityProject\\Phigros_Sim\\Library\\PramData\\AndroidApplicationController\\Cache\\com.NuanR_Mxi.PhiSim\\gradle-project\\unityLibrary\\src\\main\\cpp\\FramePacing\\CMakeLists.txt",
+    "D:\\UnityProject\\Phigros_Sim\\Library\\PramData\\AndroidApplicationController\\Cache\\com.NuanR_Mxi.PhiSim\\gradle-project\\unityLibrary\\src\\main\\cpp\\GameActivity\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "D:\\UnityEdit\\2023.2.15f1c1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\UnityProject\\Phigros_Sim\\.utmp\\Debug\\4d513qzs\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "D:\\UnityEdit\\2023.2.15f1c1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\SDK\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\UnityProject\\Phigros_Sim\\.utmp\\Debug\\4d513qzs\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "game::@d02bb112ea9f9c2ed29f": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "game",
+      "output": "D:\\UnityProject\\Phigros_Sim\\Library\\PramData\\AndroidApplicationController\\Cache\\com.NuanR_Mxi.PhiSim\\gradle-project\\unityLibrary\\build\\intermediates\\cxx\\Debug\\4d513qzs\\obj\\arm64-v8a\\libgame.so",
+      "runtimeFiles": []
+    },
+    "swappywrapper::@7e25bd1f32ce224db4e9": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "swappywrapper",
+      "output": "D:\\UnityProject\\Phigros_Sim\\Library\\PramData\\AndroidApplicationController\\Cache\\com.NuanR_Mxi.PhiSim\\gradle-project\\unityLibrary\\build\\intermediates\\cxx\\Debug\\4d513qzs\\obj\\arm64-v8a\\libswappywrapper.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "D:\\UnityEdit\\2023.2.15f1c1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "D:\\UnityEdit\\2023.2.15f1c1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\NDK\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
