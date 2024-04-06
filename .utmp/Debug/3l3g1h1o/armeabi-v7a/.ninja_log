@@ -1,0 +1,21 @@
+# ninja log v5
+270	502	7338615640357126	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	4379753880541498
+2	1466	7338615649924492	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	d8c535cdb2a14ee9
+504	905	7338615643123042	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3l3g1h1o/obj/armeabi-v7a/libswappywrapper.so	6048c179047b942a
+105	1456	7338615649909375	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d79b63b376302b8
+36	1242	7338615647705584	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f2c6067e78769e71
+140	1319	7338615648506198	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6cba242e85932db2
+184	1376	7338615649089506	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8948cd8b68b381bc
+69	1348	7338615648810629	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d52bed96f52b61e2
+225	1461	7338615649934542	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	92261313d1caf233
+1467	1746	7338615651859573	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3l3g1h1o/obj/armeabi-v7a/libgame.so	3ab2527f0131437d
+279	536	7340378769173870	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	4379753880541498
+537	982	7340378772109719	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3l3g1h1o/obj/armeabi-v7a/libswappywrapper.so	6048c179047b942a
+40	1409	7340378777825779	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f2c6067e78769e71
+198	1525	7340378778968666	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6cba242e85932db2
+160	1526	7340378778978777	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	92261313d1caf233
+76	1573	7340378779509002	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d52bed96f52b61e2
+240	1617	7340378779941756	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8948cd8b68b381bc
+6	1653	7340378780257689	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	d8c535cdb2a14ee9
+122	1693	7340378780669163	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d79b63b376302b8
+1693	2034	7340378782942916	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3l3g1h1o/obj/armeabi-v7a/libgame.so	3ab2527f0131437d

@@ -1,0 +1,21 @@
+# ninja log v5
+394	677	7335252473811092	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	87f254cdaa18293f
+15	1867	7335252485652392	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	9cbb6300df580841
+116	1667	7335252483649430	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e01ea3090a099ec0
+678	1236	7335252477614844	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/2j2j5865/obj/arm64-v8a/libswappywrapper.so	48615d540c46bab1
+285	1747	7335252484518626	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8513a2d78d6e0fcd
+338	1850	7335252485520629	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4650c4e9e1913692
+228	1773	7335252484771712	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	7048ca0d205edd92
+64	1718	7335252484219007	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3add8bfe778c94a9
+176	1879	7335252485718577	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	3041aa23738436e0
+1879	2285	7335252488471888	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/2j2j5865/obj/arm64-v8a/libgame.so	8101e7ede4854266
+485	936	7335270800249685	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	87f254cdaa18293f
+938	2010	7335270807381829	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/2j2j5865/obj/arm64-v8a/libswappywrapper.so	48615d540c46bab1
+149	2534	7335270816183287	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3add8bfe778c94a9
+283	2629	7335270817118837	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8513a2d78d6e0fcd
+213	2675	7335270817583662	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e01ea3090a099ec0
+346	2794	7335270818779379	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	7048ca0d205edd92
+87	2830	7335270819107422	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	3041aa23738436e0
+12	2845	7335270819239018	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	9cbb6300df580841
+415	2857	7335270819324076	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4650c4e9e1913692
+2857	3424	7335270823099506	D:/UnityProject/Phigros_Sim/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/2j2j5865/obj/arm64-v8a/libgame.so	8101e7ede4854266
