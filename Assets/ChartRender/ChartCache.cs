@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ChartTemp : MonoBehaviour
+public class ChartCache : MonoBehaviour
 {
-    public static ChartTemp Instance { get; private set; }
+    public static ChartCache Instance { get; private set; }
     public ChartReader.Chart chart { get; set; } = new ChartReader.Chart();
 
     // Start is called before the first frame update

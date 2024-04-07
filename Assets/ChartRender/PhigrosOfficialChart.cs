@@ -172,29 +172,41 @@ public class ChartReader : MonoBehaviour
     /// 官谱文件路径
     /// </summary>
     /// </param>
-    static public void ChartConvert(string ChartFilePath)
+    static public Chart ChartConvert(string ChartFilePath)
     {
         string chartString = File.ReadAllText(ChartFilePath);//读取到字符串
         dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//转换为json对象
+        Chart chart = new Chart();//创建chart对象
         if (chartJsonObject["formatVersion"].ToString() == "3")//检查格式，格式不正确将结束运行
         {
             for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//按照判定线数量运行i次
             {
                 JudgeLine judgeLine = new JudgeLine();
                 float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
-                for (int moveEventCount = 0; moveEventCount < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventCount++)//读取所有移动事件
+                for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
                 {
-                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventCount]["endTime"], judgeLineBPM);//转换出时间，时间为毫秒
-                    float xValue = CoordinateTransformer.TransformX(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventCount]["end"]);//狗屎官谱，我草死你的吗，end是X
-                    float yValue = CoordinateTransformer.TransformY(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventCount]["end2"]);//狗屎官谱，我草死你的吗，end2是Y
-                    
+                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    float xValue = CoordinateTransformer.TransformX(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xValue
+                    float yValue = CoordinateTransformer.TransformY(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yValue
+                    ChartEvents.XMove xMove = new ChartEvents.XMove(); xMove.time = time; xMove.value = xValue;
+                    ChartEvents.YMove yMove = new ChartEvents.YMove(); yMove.time = time; yMove.value = yValue;
+                    judgeLine.xMoves.Add(xMove); judgeLine.yMoves.Add(yMove);
                 }
+
+                for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//读取所有角度事件
+                {
+                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    float rotateValue = chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateValue
+                    ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents(); rotateChangeEvents.time = time; rotateChangeEvents.value = rotateValue;
+                    judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
+                }
+                chart.judgeLines.Add(judgeLine);
             }
+            return chart;//返回谱面
         }
         else
         {
-            //回到MainScene，编号为0
-            SceneManager.LoadScene(0);
+            return null;//否则为空，留着报错吧（笑
         }
     }
 }

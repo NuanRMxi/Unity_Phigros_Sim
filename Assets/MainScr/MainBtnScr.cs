@@ -93,9 +93,10 @@ public class MainBtnScrt : MonoBehaviour
             try
             {
                 dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(TempFilePath + "/config.json"));
-                SceneManager.LoadScene(1);
-                ChartReader.ChartConvert(TempFilePath + "\\" + json["Chart"].ToString());
+                //SceneManager.LoadScene(1);
+                
                 //StartPlay.DrawPlayScene(Chart);
+                ChartCache.Instance.chart = ChartReader.ChartConvert(TempFilePath + "\\" + json["Chart"].ToString());
             }
             catch (Exception)
             {
