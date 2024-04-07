@@ -16,7 +16,7 @@ public class StartPlay : MonoBehaviour
     // 此方法会在第一帧前调用
     void Start()
     {
-        Chart chart = ChartTemp.Instance.chart;
+        Chart chart = ChartCache.Instance.chart;
         if (chart == null)
         {
             //新建一个Exception，表示缓存是空的
