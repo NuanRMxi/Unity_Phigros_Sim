@@ -44,7 +44,7 @@ public class MainBtnScrt : MonoBehaviour
         {
 
             string TempFilePath;
-            //如果环境为Android，获取自身包名。以确定自身专有路径，顺带尝试提权到ROOT
+            //如果环境为Android，获取自身包名。以确定自身专有路径
             if (Application.platform == RuntimePlatform.Android)
             {
                 AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -56,8 +56,9 @@ public class MainBtnScrt : MonoBehaviour
             }
             else
             {
-                TempFilePath = Application.persistentDataPath + "/ChartTemp";
+                TempFilePath = Application.persistentDataPath + "/ChartTemp";//那就是Windows了，释放在程序目录
             }
+
             try
             {
 
@@ -80,7 +81,7 @@ public class MainBtnScrt : MonoBehaviour
             //找到并解压文件
             try
             {
-                ZipFile.ExtractToDirectory(ChartZipFilePath.text, TempFilePath);
+                ZipFile.ExtractToDirectory(ChartZipFilePath.text, TempFilePath);//解压到指定文件夹
             }
             catch (Exception ex)
             {
@@ -91,7 +92,10 @@ public class MainBtnScrt : MonoBehaviour
             //尝试读取配置文件
             try
             {
-                dynamic json = JsonConvert.DeserializeObject(File.ReadAllText("ChartTemp/config.json"));
+                dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(TempFilePath + "/config.json"));
+                SceneManager.LoadScene(1);
+                ChartReader.ChartConvert(TempFilePath + "\\" + json["Chart"].ToString());
+                //StartPlay.DrawPlayScene(Chart);
             }
             catch (Exception)
             {
@@ -108,8 +112,7 @@ public class MainBtnScrt : MonoBehaviour
             DebugReadLog.text = "你大抵是寄了：" + ex.ToString();
         }
 
-        //SceneManager.LoadScene(1);
-        //StartPlay.DrawPlayScene(Chart);
+
 
     }
     /// <summary>
