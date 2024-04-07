@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
-using static ChartReader.chartEvents;
 
 public class ChartReader : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class ChartReader : MonoBehaviour
     {
         
     }
-    public class chartEvents
+    public class ChartEvents
     {
         public class XMove
         {
@@ -104,19 +103,19 @@ public class ChartReader : MonoBehaviour
         /// <summary>
         /// 所有Y移动事件，即使在官谱中，不会出现分离的情况，但是我们先进行拆分处理
         /// </summary>
-        public List<YMove> yMoves { get; set; }
+        public List<ChartEvents.YMove> yMoves { get; set; }
         /// <summary>
         /// 所有X移动事件，即使在官谱中，不会出现分离的情况，但是我们先进行拆分处理
         /// </summary>
-        public List<XMove> xMoves { get; set; }
+        public List<ChartEvents.XMove> xMoves { get; set; }
         /// <summary>
         /// 所有判定线旋转事件
         /// </summary>
-        public List<RotateChangeEvents> rotateChangeEvents { get; set; }
+        public List<ChartEvents.RotateChangeEvents> rotateChangeEvents { get; set; }
         /// <summary>
         /// 所有不透明度事件
         /// </summary>
-        public List<DisappearEvents> disappearEvents { get; set; }
+        public List<ChartEvents.DisappearEvents> disappearEvents { get; set; }
 
     }
     public class Chart
@@ -173,7 +172,7 @@ public class ChartReader : MonoBehaviour
     /// 官谱文件路径
     /// </summary>
     /// </param>
-    public void ChartConvert(string ChartFilePath)
+    static public void ChartConvert(string ChartFilePath)
     {
         string chartString = File.ReadAllText(ChartFilePath);//读取到字符串
         dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//转换为json对象
@@ -181,6 +180,7 @@ public class ChartReader : MonoBehaviour
         {
             for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//按照判定线数量运行i次
             {
+                JudgeLine judgeLine = new JudgeLine();
                 float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                 for (int moveEventCount = 0; moveEventCount < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventCount++)//读取所有移动事件
                 {
