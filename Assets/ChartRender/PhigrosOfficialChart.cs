@@ -24,76 +24,76 @@ public class ChartReader : MonoBehaviour
         public class XMove
         {
             /// <summary>
-            /// ÒÆ¶¯Ê±¼ä£¬µ±Ç°Îª¹Ø¼üÖ¡ÊµÏÖ£¬ËùÒÔÃ»ÓĞ¿ªÊ¼Óë½áÊø£¬Ö»ÓĞ·¢ÉúÊ±¼ä£¬µ¥Î»ºÁÃë
+            /// ç§»åŠ¨æ—¶é—´ï¼Œå½“å‰ä¸ºå…³é”®å¸§å®ç°ï¼Œæ‰€ä»¥æ²¡æœ‰å¼€å§‹ä¸ç»“æŸï¼Œåªæœ‰å‘ç”Ÿæ—¶é—´ï¼Œå•ä½æ¯«ç§’
             /// </summary>
             public float time { get; set; }
             /// <summary>
-            /// ¼´±»ÒÆ¶¯µ½µÄXÎ»ÖÃ
+            /// å³è¢«ç§»åŠ¨åˆ°çš„Xä½ç½®
             /// </summary>
             public float value { get; set; }
         }
         public class YMove
         {
             /// <summary>
-            /// ÒÆ¶¯Ê±¼ä£¬µ±Ç°Îª¹Ø¼üÖ¡ÊµÏÖ£¬ËùÒÔÃ»ÓĞ¿ªÊ¼Óë½áÊø£¬Ö»ÓĞ·¢ÉúÊ±¼ä£¬µ¥Î»ºÁÃë
+            /// ç§»åŠ¨æ—¶é—´ï¼Œå½“å‰ä¸ºå…³é”®å¸§å®ç°ï¼Œæ‰€ä»¥æ²¡æœ‰å¼€å§‹ä¸ç»“æŸï¼Œåªæœ‰å‘ç”Ÿæ—¶é—´ï¼Œå•ä½æ¯«ç§’
             /// </summary>
             public float time { get; set; }
             /// <summary>
-            /// ¼´±»ÒÆ¶¯µ½µÄYÎ»ÖÃ
+            /// å³è¢«ç§»åŠ¨åˆ°çš„Yä½ç½®
             /// </summary>
             public float value { get; set; }
         }
         public class RotateChangeEvents
         {
             /// <summary>
-            /// Ğı×ªÊ±¼ä£¬µ±Ç°Îª¹Ø¼üÖ¡ÊµÏÖ£¬ËùÒÔÃ»ÓĞ¿ªÊ¼Óë½áÊø£¬Ö»ÓĞ·¢ÉúÊ±¼ä£¬µ¥Î»ºÁÃë
+            /// æ—‹è½¬æ—¶é—´ï¼Œå½“å‰ä¸ºå…³é”®å¸§å®ç°ï¼Œæ‰€ä»¥æ²¡æœ‰å¼€å§‹ä¸ç»“æŸï¼Œåªæœ‰å‘ç”Ÿæ—¶é—´ï¼Œå•ä½æ¯«ç§’
             /// </summary>
             public float time { get; set; }
             /// <summary>
-            /// ¼´±»Ğı×ªµ½µÄ½Ç¶È
+            /// å³è¢«æ—‹è½¬åˆ°çš„è§’åº¦
             /// </summary>
             public float value { get; set; }
         }
         public class DisappearEvents
         {
             /// <summary>
-            /// Í¸Ã÷¶È¸Ä±äÊ±¼ä£¬µ±Ç°Îª¹Ø¼üÖ¡ÊµÏÖ£¬ËùÒÔÃ»ÓĞ¿ªÊ¼Óë½áÊø£¬Ö»ÓĞ·¢ÉúÊ±¼ä£¬µ¥Î»ºÁÃë
+            /// é€æ˜åº¦æ”¹å˜æ—¶é—´ï¼Œå½“å‰ä¸ºå…³é”®å¸§å®ç°ï¼Œæ‰€ä»¥æ²¡æœ‰å¼€å§‹ä¸ç»“æŸï¼Œåªæœ‰å‘ç”Ÿæ—¶é—´ï¼Œå•ä½æ¯«ç§’
             /// </summary>
             public float time { get; set; }
             /// <summary>
-            /// ¼´±»¸Ä±äµ½µÄ²»Í¸Ã÷¶È£¬0ÊÇÍêÈ«Í¸Ã÷£¬1ÊÇÍêÈ«²»Í¸Ã÷
+            /// å³è¢«æ”¹å˜åˆ°çš„ä¸é€æ˜åº¦ï¼Œ0æ˜¯å®Œå…¨é€æ˜ï¼Œ1æ˜¯å®Œå…¨ä¸é€æ˜
             /// </summary>
             public float value { get; set; }
         }
         
     }
     /// <summary>
-    /// Ò»¸önote
+    /// ä¸€ä¸ªnote
     /// </summary>
     public class Note
     {
         /// <summary>
-        /// noteÀàĞÍ¡£1ÎªTap£¬2ÎªDrag£¬3ÎªHold£¬4ÎªFlick
+        /// noteç±»å‹ã€‚1ä¸ºTapï¼Œ2ä¸ºDragï¼Œ3ä¸ºHoldï¼Œ4ä¸ºFlick
         /// </summary>
         public float noteType { get; set; }
         /// <summary>
-        /// Êµ¼Ê±»¿ªÊ¼´ò»÷Ê±¼ä£¬µ¥Î»ÎªºÁÃë
+        /// å®é™…è¢«å¼€å§‹æ‰“å‡»æ—¶é—´ï¼Œå•ä½ä¸ºæ¯«ç§’
         /// </summary>
         public float clickStartTime { get; set; }
         /// <summary>
-        /// Èç¹û´ËnoteÎªHold£¬´ËÖµÎªHoldµÄ½áÊøÊ±¼ä£¬µ¥Î»ºÁÃë£¬·´Ö®£¬´ËÊıÖµ»áÓëclickStartTimeÏàÍ¬
+        /// å¦‚æœæ­¤noteä¸ºHoldï¼Œæ­¤å€¼ä¸ºHoldçš„ç»“æŸæ—¶é—´ï¼Œå•ä½æ¯«ç§’ï¼Œåä¹‹ï¼Œæ­¤æ•°å€¼ä¼šä¸clickStartTimeç›¸åŒ
         /// </summary>
         public float clickEndTime { get; set; }
         /// <summary>
-        /// ÏÂÂä·½Ïò£¬trueÊ±Îª´ÓÉÏ·½ÏÂÂä£¬·´Ö®´ÓÏÂ·½ÏÂÂä
+        /// ä¸‹è½æ–¹å‘ï¼Œtrueæ—¶ä¸ºä»ä¸Šæ–¹ä¸‹è½ï¼Œåä¹‹ä»ä¸‹æ–¹ä¸‹è½
         /// </summary>
         public bool above { get; set; }
         /// <summary>
-        /// ËÙ¶È±¶ÂÊ£¬Ô½´óÔ½¿ì£¬Ä¬ÈÏÎª1£¬¼´²»¼ÓËÙ¡£Êµ¼ÊËÙ¶È¹«Ê½Îªµ±Ç°speedEventValue * speedMultiplier
+        /// é€Ÿåº¦å€ç‡ï¼Œè¶Šå¤§è¶Šå¿«ï¼Œé»˜è®¤ä¸º1ï¼Œå³ä¸åŠ é€Ÿã€‚å®é™…é€Ÿåº¦å…¬å¼ä¸ºå½“å‰speedEventValue * speedMultiplier
         /// </summary>
         public float speedMultiplier { get; set; }
         /// <summary>
-        /// noteÏà¶ÔÓÚÅĞ¶¨ÏßµÄXÎ»ÖÃ
+        /// noteç›¸å¯¹äºåˆ¤å®šçº¿çš„Xä½ç½®
         /// </summary>
         public float X { get; set; }
     }
@@ -101,19 +101,19 @@ public class ChartReader : MonoBehaviour
     public class JudgeLine
     {
         /// <summary>
-        /// ËùÓĞYÒÆ¶¯ÊÂ¼ş£¬¼´Ê¹ÔÚ¹ÙÆ×ÖĞ£¬²»»á³öÏÖ·ÖÀëµÄÇé¿ö£¬µ«ÊÇÎÒÃÇÏÈ½øĞĞ²ğ·Ö´¦Àí
+        /// æ‰€æœ‰Yç§»åŠ¨äº‹ä»¶ï¼Œå³ä½¿åœ¨å®˜è°±ä¸­ï¼Œä¸ä¼šå‡ºç°åˆ†ç¦»çš„æƒ…å†µï¼Œä½†æ˜¯æˆ‘ä»¬å…ˆè¿›è¡Œæ‹†åˆ†å¤„ç†
         /// </summary>
         public List<ChartEvents.YMove> yMoves { get; set; }
         /// <summary>
-        /// ËùÓĞXÒÆ¶¯ÊÂ¼ş£¬¼´Ê¹ÔÚ¹ÙÆ×ÖĞ£¬²»»á³öÏÖ·ÖÀëµÄÇé¿ö£¬µ«ÊÇÎÒÃÇÏÈ½øĞĞ²ğ·Ö´¦Àí
+        /// æ‰€æœ‰Xç§»åŠ¨äº‹ä»¶ï¼Œå³ä½¿åœ¨å®˜è°±ä¸­ï¼Œä¸ä¼šå‡ºç°åˆ†ç¦»çš„æƒ…å†µï¼Œä½†æ˜¯æˆ‘ä»¬å…ˆè¿›è¡Œæ‹†åˆ†å¤„ç†
         /// </summary>
         public List<ChartEvents.XMove> xMoves { get; set; }
         /// <summary>
-        /// ËùÓĞÅĞ¶¨ÏßĞı×ªÊÂ¼ş
+        /// æ‰€æœ‰åˆ¤å®šçº¿æ—‹è½¬äº‹ä»¶
         /// </summary>
         public List<ChartEvents.RotateChangeEvents> rotateChangeEvents { get; set; }
         /// <summary>
-        /// ËùÓĞ²»Í¸Ã÷¶ÈÊÂ¼ş
+        /// æ‰€æœ‰ä¸é€æ˜åº¦äº‹ä»¶
         /// </summary>
         public List<ChartEvents.DisappearEvents> disappearEvents { get; set; }
 
@@ -121,16 +121,16 @@ public class ChartReader : MonoBehaviour
     public class Chart
     {
         /// <summary>
-        /// Çú»æ
+        /// æ›²ç»˜
         /// </summary>
         public Image Illustration { get; set; }
         /// <summary>
-        /// ÅĞ¶¨ÏßÊı×é
+        /// åˆ¤å®šçº¿æ•°ç»„
         /// </summary>   
         public List<JudgeLine> judgeLines { get; set; }
     }
     /// <summary>
-    /// ×ø±ê×ª»»£¬½«¹ÙÆ×ÖĞµÄ×ø±ê×ª»»ÎªRe:PhiEditÖĞµÄ×ø±ê£¬·½±ãÍ³Ò»¼ÆËã
+    /// åæ ‡è½¬æ¢ï¼Œå°†å®˜è°±ä¸­çš„åæ ‡è½¬æ¢ä¸ºRe:PhiEditä¸­çš„åæ ‡ï¼Œæ–¹ä¾¿ç»Ÿä¸€è®¡ç®—
     /// </summary>
     public class CoordinateTransformer
     {
@@ -139,19 +139,19 @@ public class ChartReader : MonoBehaviour
         private const float YMin = -450f;
         private const float YMax = 450f;
         /// <summary>
-        /// Ìá¹©¹ÙÆ×X×ø±ê£¬·µ»ØRe:PhiEditÖĞµÄX×ø±ê
+        /// æä¾›å®˜è°±Xåæ ‡ï¼Œè¿”å›Re:PhiEditä¸­çš„Xåæ ‡
         /// </summary>
-        /// <param name="x"><summary>¹ÙÆ×X×ø±ê</summary></param>
-        /// <returns>Re:PhiEditµÄX×ø±ê</returns>
+        /// <param name="x"><summary>å®˜è°±Xåæ ‡</summary></param>
+        /// <returns>Re:PhiEditçš„Xåæ ‡</returns>
         public static float TransformX(float x)
         {
             return x * (XMax - XMin) + XMin;
         }
         /// <summary>
-        /// Ìá¹©¹ÙÆ×Y×ø±ê£¬·µ»ØRe:PhiEditÖĞµÄX×ø±ê
+        /// æä¾›å®˜è°±Yåæ ‡ï¼Œè¿”å›Re:PhiEditä¸­çš„Xåæ ‡
         /// </summary>
-        /// <param name="y"><summary>¹ÙÆ×X×ø±ê</summary></param>
-        /// <returns>Re:PhiEditµÄY×ø±ê</returns>
+        /// <param name="y"><summary>å®˜è°±Xåæ ‡</summary></param>
+        /// <returns>Re:PhiEditçš„Yåæ ‡</returns>
         public static float TransformY(float y)
         {
             return y * (YMax - YMin) + YMin;
@@ -159,54 +159,54 @@ public class ChartReader : MonoBehaviour
     }
     public static float CalculateOriginalTime(float T, float bpm)
     {
-        float originalTime = (1.875f / bpm) * T;//½á¹ûÎªÃë
-        originalTime = originalTime * 1000f;//×ª»»ÎªºÁÃë
-        return originalTime;//·µ»Ø
+        float originalTime = (1.875f / bpm) * T;//ç»“æœä¸ºç§’
+        originalTime = originalTime * 1000f;//è½¬æ¢ä¸ºæ¯«ç§’
+        return originalTime;//è¿”å›
     }
 
     /// <summary>
-    /// ¹ÙÆ××ª»»·½·¨
+    /// å®˜è°±è½¬æ¢æ–¹æ³•
     /// </summary>
     /// <param name="ChartFilePath">
     /// <summary>
-    /// ¹ÙÆ×ÎÄ¼şÂ·¾¶
+    /// å®˜è°±æ–‡ä»¶è·¯å¾„
     /// </summary>
     /// </param>
     static public Chart ChartConvert(string ChartFilePath)
     {
-        string chartString = File.ReadAllText(ChartFilePath);//¶ÁÈ¡µ½×Ö·û´®
-        dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//×ª»»Îªjson¶ÔÏó
-        Chart chart = new Chart();//´´½¨chart¶ÔÏó
-        if (chartJsonObject["formatVersion"].ToString() == "3")//¼ì²é¸ñÊ½£¬¸ñÊ½²»ÕıÈ·½«½áÊøÔËĞĞ
+        string chartString = File.ReadAllText(ChartFilePath);//è¯»å–åˆ°å­—ç¬¦ä¸²
+        dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//è½¬æ¢ä¸ºjsonå¯¹è±¡
+        Chart chart = new Chart();//åˆ›å»ºchartå¯¹è±¡
+        if (chartJsonObject["formatVersion"].ToString() == "3")//æ£€æŸ¥æ ¼å¼ï¼Œæ ¼å¼ä¸æ­£ç¡®å°†ç»“æŸè¿è¡Œ
         {
-            for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//°´ÕÕÅĞ¶¨ÏßÊıÁ¿ÔËĞĞi´Î
+            for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//æŒ‰ç…§åˆ¤å®šçº¿æ•°é‡è¿è¡Œiæ¬¡
             {
                 JudgeLine judgeLine = new JudgeLine();
-                float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//¶ÁÈ¡´ËÅĞ¶¨ÏßBPM£¬¹ÙÆ×ÖĞÃ¿ÌõÏßÒ»¸öBPM
-                for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//¶ÁÈ¡ËùÓĞÒÆ¶¯ÊÂ¼ş
+                float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//è¯»å–æ­¤åˆ¤å®šçº¿BPMï¼Œå®˜è°±ä¸­æ¯æ¡çº¿ä¸€ä¸ªBPM
+                for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//è¯»å–æ‰€æœ‰ç§»åŠ¨äº‹ä»¶
                 {
-                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//×ª»»Ê±¼ä£¬µ¥Î»ÎªºÁÃë
-                    float xValue = CoordinateTransformer.TransformX(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//¶ÁÈ¡endÎªxValue
-                    float yValue = CoordinateTransformer.TransformY(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//¶ÁÈ¡end2ÎªyValue
+                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//è½¬æ¢æ—¶é—´ï¼Œå•ä½ä¸ºæ¯«ç§’
+                    float xValue = CoordinateTransformer.TransformX(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//è¯»å–endä¸ºxValue
+                    float yValue = CoordinateTransformer.TransformY(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//è¯»å–end2ä¸ºyValue
                     ChartEvents.XMove xMove = new ChartEvents.XMove(); xMove.time = time; xMove.value = xValue;
                     ChartEvents.YMove yMove = new ChartEvents.YMove(); yMove.time = time; yMove.value = yValue;
                     judgeLine.xMoves.Add(xMove); judgeLine.yMoves.Add(yMove);
                 }
 
-                for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//¶ÁÈ¡ËùÓĞ½Ç¶ÈÊÂ¼ş
+                for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//è¯»å–æ‰€æœ‰è§’åº¦äº‹ä»¶
                 {
-                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//×ª»»Ê±¼ä£¬µ¥Î»ÎªºÁÃë
-                    float rotateValue = chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//¶ÁÈ¡endÎªrotateValue
+                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//è½¬æ¢æ—¶é—´ï¼Œå•ä½ä¸ºæ¯«ç§’
+                    float rotateValue = chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//è¯»å–endä¸ºrotateValue
                     ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents(); rotateChangeEvents.time = time; rotateChangeEvents.value = rotateValue;
                     judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
                 }
                 chart.judgeLines.Add(judgeLine);
             }
-            return chart;//·µ»ØÆ×Ãæ
+            return chart;//è¿”å›è°±é¢
         }
         else
         {
-            return null;//·ñÔòÎª¿Õ£¬Áô×Å±¨´í°É£¨Ğ¦
+            return null;//å¦åˆ™ä¸ºç©ºï¼Œç•™ç€æŠ¥é”™å§ï¼ˆç¬‘
         }
     }
 }
