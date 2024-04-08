@@ -26,8 +26,8 @@ public class MainBtnScrt : MonoBehaviour
     {
         while (true)
         {
-            // Ã¿Ö¡Ğı×ªImage¿Ø¼ş
-            ±³¾°°å.transform.Rotate(0, 0, 50f * Time.deltaTime);
+            // æ¯å¸§æ—‹è½¬Imageæ§ä»¶
+            èƒŒæ™¯æ¿.transform.Rotate(0, 0, 50f * Time.deltaTime);
             yield return null;
         }
     }
@@ -44,7 +44,7 @@ public class MainBtnScrt : MonoBehaviour
         {
 
             string TempFilePath;
-            //Èç¹û»·¾³ÎªAndroid£¬»ñÈ¡×ÔÉí°üÃû¡£ÒÔÈ·¶¨×ÔÉí×¨ÓĞÂ·¾¶
+            //å¦‚æœç¯å¢ƒä¸ºAndroidï¼Œè·å–è‡ªèº«åŒ…åã€‚ä»¥ç¡®å®šè‡ªèº«ä¸“æœ‰è·¯å¾„
             if (Application.platform == RuntimePlatform.Android)
             {
                 AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -52,11 +52,11 @@ public class MainBtnScrt : MonoBehaviour
                 AndroidJavaObject packageManager = activity.Call<AndroidJavaObject>("getPackageManager");
                 AndroidJavaObject packageInfo = packageManager.Call<AndroidJavaObject>("getPackageInfo", Application.identifier, 0);
                 string packageName = packageInfo.Get<string>("packageName");
-                TempFilePath = "/data/data/" + packageName + "/files/ChartTemp";//Ë½ÓĞÄ¿Â¼µØÖ·
+                TempFilePath = "/data/data/" + packageName + "/files/ChartTemp";//ç§æœ‰ç›®å½•åœ°å€
             }
             else
             {
-                TempFilePath = Application.persistentDataPath + "/ChartTemp";//ÄÇ¾ÍÊÇWindowsÁË£¬ÊÍ·ÅÔÚ³ÌĞòÄ¿Â¼
+                TempFilePath = Application.persistentDataPath + "/ChartTemp";//é‚£å°±æ˜¯Windowsäº†ï¼Œé‡Šæ”¾åœ¨ç¨‹åºç›®å½•
             }
 
             try
@@ -64,32 +64,32 @@ public class MainBtnScrt : MonoBehaviour
 
                 if (DeleteDirectory("ChartTemp"))
                 {
-                    DebugReadLog.text = "»º´æÎÄ¼şÒÑÉ¾³ı";
+                    DebugReadLog.text = "ç¼“å­˜æ–‡ä»¶å·²åˆ é™¤";
                 }
                 else
                 {
-                    DebugReadLog.text = "¿ÉÄÜÃ»ÓĞ»º´æÎÄ¼ş...";
+                    DebugReadLog.text = "å¯èƒ½æ²¡æœ‰ç¼“å­˜æ–‡ä»¶...";
                 }
             }
             catch (Exception ex)
             {
-                DebugReadLog.text = "¿ÉÄÜÃ»ÓĞ»º´æÎÄ¼ş..." + ex.Message;
+                DebugReadLog.text = "å¯èƒ½æ²¡æœ‰ç¼“å­˜æ–‡ä»¶..." + ex.Message;
             }
             
             
 
-            //ÕÒµ½²¢½âÑ¹ÎÄ¼ş
+            //æ‰¾åˆ°å¹¶è§£å‹æ–‡ä»¶
             try
             {
-                ZipFile.ExtractToDirectory(ChartZipFilePath.text, TempFilePath);//½âÑ¹µ½Ö¸¶¨ÎÄ¼ş¼Ğ
+                ZipFile.ExtractToDirectory(ChartZipFilePath.text, TempFilePath);//è§£å‹åˆ°æŒ‡å®šæ–‡ä»¶å¤¹
             }
             catch (Exception ex)
             {
-                DebugReadLog.text = "½âÑ¹Ê§°Ü£º" + ex.Message;
+                DebugReadLog.text = "è§£å‹å¤±è´¥ï¼š" + ex.Message;
                 throw;
             }
 
-            //³¢ÊÔ¶ÁÈ¡ÅäÖÃÎÄ¼ş
+            //å°è¯•è¯»å–é…ç½®æ–‡ä»¶
             try
             {
                 dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(TempFilePath + "/config.json"));
@@ -100,26 +100,26 @@ public class MainBtnScrt : MonoBehaviour
             }
             catch (Exception)
             {
-                //³öÎÊÌâÊä³öÈÕÖ¾
-                DebugReadLog.text = "ÅäÖÃÎÄ¼ş¶ÁÈ¡Ê§°Ü£¬ÄãĞ´ÁËconfig.jsonÂğ£¿";
+                //å‡ºé—®é¢˜è¾“å‡ºæ—¥å¿—
+                DebugReadLog.text = "é…ç½®æ–‡ä»¶è¯»å–å¤±è´¥ï¼Œä½ å†™äº†config.jsonå—ï¼Ÿ";
                 throw;
             }
 
-            //Òş²Ø°´Å¥
+            //éšè—æŒ‰é’®
             //gameObject.SetActive(false);
         }
         catch (Exception ex)
         {
-            DebugReadLog.text = "Äã´óµÖÊÇ¼ÄÁË£º" + ex.ToString();
+            DebugReadLog.text = "ä½ å¤§æŠµæ˜¯å¯„äº†ï¼š" + ex.ToString();
         }
 
 
 
     }
     /// <summary>
-    /// É¾³ı·Ç¿ÕÎÄ¼ş¼Ğ
+    /// åˆ é™¤éç©ºæ–‡ä»¶å¤¹
     /// </summary>
-    /// <param name="path">ÒªÉ¾³ıµÄÎÄ¼ş¼ĞÄ¿Â¼</param>
+    /// <param name="path">è¦åˆ é™¤çš„æ–‡ä»¶å¤¹ç›®å½•</param>
     bool DeleteDirectory(string path)
     {
         try

@@ -9,47 +9,47 @@ using static ChartReader;
 
 public class StartPlay : MonoBehaviour
 {
-    public RectTransform canvasRectTransform;//´ò»÷»­²¼
-    public Image Background_Board;//±³¾°°å
+    public RectTransform canvasRectTransform;//æ‰“å‡»ç”»å¸ƒ
+    public Image Background_Board;//èƒŒæ™¯æ¿
 
     // Start is called before the first frame update
-    // ´Ë·½·¨»áÔÚµÚÒ»Ö¡Ç°µ÷ÓÃ
+    // æ­¤æ–¹æ³•ä¼šåœ¨ç¬¬ä¸€å¸§å‰è°ƒç”¨
     void Start()
     {
         Chart chart = ChartCache.Instance.chart;
         if (chart == null)
         {
-            //ĞÂ½¨Ò»¸öException£¬±íÊ¾»º´æÊÇ¿ÕµÄ
-            throw new FileNotFoundException("Ã»ÓĞÕÒµ½ÎÄ¼ş£¬»º´æÎª¿Õ\nCache is empty");
+            //æ–°å»ºä¸€ä¸ªExceptionï¼Œè¡¨ç¤ºç¼“å­˜æ˜¯ç©ºçš„
+            throw new FileNotFoundException("æ²¡æœ‰æ‰¾åˆ°æ–‡ä»¶ï¼Œç¼“å­˜ä¸ºç©º\nCache is empty");
         }
         else
         {
-            //»æÖÆÆ×Ãæµ½ÆÁÄ»
+            //ç»˜åˆ¶è°±é¢åˆ°å±å¹•
             DrawPlayScene(chart);
         }
         
     }
 
     // Update is called once per frame
-    // ´Ë·½·¨»á±»Ã¿Ò»Ö¡µ÷ÓÃ
+    // æ­¤æ–¹æ³•ä¼šè¢«æ¯ä¸€å¸§è°ƒç”¨
     void Update()
     {
         
     }
     public void DrawPlayScene(Chart chart)
     {
-        //»ñÈ¡ÆÁÄ»·Ö±æÂÊ¡£Ö¸¶¨ÆÁÄ»±ÈÀı£¬¸ß²»±ä£¬Ö»¸Ä±ä¿í£¬È»ºó°´ÕÕ16:9µÄ±ÈÀı½øĞĞ²ÃÇĞ
+        //è·å–å±å¹•åˆ†è¾¨ç‡ã€‚æŒ‡å®šå±å¹•æ¯”ä¾‹ï¼Œé«˜ä¸å˜ï¼Œåªæ”¹å˜å®½ï¼Œç„¶åæŒ‰ç…§16:9çš„æ¯”ä¾‹è¿›è¡Œè£åˆ‡
 
 
 
 
 
-        //»ñÈ¡ÆÁÄ»·Ö±æÂÊ
+        //è·å–å±å¹•åˆ†è¾¨ç‡
         int screenW = Screen.width;
         int screenH = Screen.height;
-        //¶Ô·Ö±æÂÊ½øĞĞ²ÃÇĞµÈ²Ù×÷£¬½øĞĞÖ¸¶¨·Ö±æÂÊ£¬·½±ãÊÊÅä¸÷ÖÖÒìĞÔĞÎÆÁÄ»£¬ÕâÊÇÊ¹ÓÃ16:9£¬·½±ãºóĞøµ÷ÓÃ
+        //å¯¹åˆ†è¾¨ç‡è¿›è¡Œè£åˆ‡ç­‰æ“ä½œï¼Œè¿›è¡ŒæŒ‡å®šåˆ†è¾¨ç‡ï¼Œæ–¹ä¾¿é€‚é…å„ç§å¼‚æ€§å½¢å±å¹•ï¼Œè¿™æ˜¯ä½¿ç”¨16:9ï¼Œæ–¹ä¾¿åç»­è°ƒç”¨
         Screen.SetResolution(1920, 1080, true);
-        //ÉèÖÃ»­²¼µÄ´óĞ¡
+        //è®¾ç½®ç”»å¸ƒçš„å¤§å°
         canvasRectTransform.sizeDelta = new Vector2(1920, 1080);
         
 
@@ -58,34 +58,34 @@ public class StartPlay : MonoBehaviour
 
 
 
-        // ¼ÙÉèÄãÒÑ¾­ÓĞÁËÒ»¸öRectTransform¶ÔÏó£¬´ú±íÄãµÄ»­²¼
+        // å‡è®¾ä½ å·²ç»æœ‰äº†ä¸€ä¸ªRectTransformå¯¹è±¡ï¼Œä»£è¡¨ä½ çš„ç”»å¸ƒ
 
-        // ÉèÖÃ»­²¼µÄ´óĞ¡
+        // è®¾ç½®ç”»å¸ƒçš„å¤§å°
         //canvasRectTransform.sizeDelta = new Vector2(1920, 1080);
 
-        // Æ×ÃæÖĞµÄ×ø±ê
+        // è°±é¢ä¸­çš„åæ ‡
         Vector2 scorePosition = new Vector2(0, 0);
 
         /*
-        // ½«Æ×ÃæÖĞµÄ×ø±êÓ³Éäµ½»­²¼ÉÏ
+        // å°†è°±é¢ä¸­çš„åæ ‡æ˜ å°„åˆ°ç”»å¸ƒä¸Š
         Vector2 canvasPosition = Vector2.Lerp(
             new Vector2(-canvasRectTransform.sizeDelta.x / 2, -canvasRectTransform.sizeDelta.y / 2),
             new Vector2(canvasRectTransform.sizeDelta.x / 2, canvasRectTransform.sizeDelta.y / 2),
             new Vector2((scorePosition.x + 675) / (2 * 675), (scorePosition.y + 450) / (2 * 450))
         );
         */
-        // ·Ö±ğ¼ÆËã²åÖµÒò×Ó
+        // åˆ†åˆ«è®¡ç®—æ’å€¼å› å­
         float factorX = (scorePosition.x + 675) / (2 * 675);
         float factorY = (scorePosition.y + 450) / (2 * 450);
 
-        // Ê¹ÓÃ²åÖµÒò×Ó½«scorePositionÓ³Éäµ½canvasPosition
+        // ä½¿ç”¨æ’å€¼å› å­å°†scorePositionæ˜ å°„åˆ°canvasPosition
         Vector2 canvasPosition = Vector2.Lerp(
             new Vector2(-canvasRectTransform.sizeDelta.x / 2, -canvasRectTransform.sizeDelta.y / 2),
             new Vector2(canvasRectTransform.sizeDelta.x / 2, canvasRectTransform.sizeDelta.y / 2),
             factorX
         );
-        // ÔÚ»­²¼ÉÏÉèÖÃĞÂµÄÎ»ÖÃ
-        RectTransform judgeLineRectTransform; // ÕâÊÇÄãµÄÒô·ûµÄRectTransform
+        // åœ¨ç”»å¸ƒä¸Šè®¾ç½®æ–°çš„ä½ç½®
+        RectTransform judgeLineRectTransform; // è¿™æ˜¯ä½ çš„éŸ³ç¬¦çš„RectTransform
         
         //noteRectTransform.anchoredPosition = canvasPosition;
 
