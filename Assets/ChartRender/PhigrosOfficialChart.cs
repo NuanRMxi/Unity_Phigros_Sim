@@ -128,6 +128,10 @@ public class ChartReader : MonoBehaviour
         /// 判定线数组
         /// </summary>   
         public List<JudgeLine> judgeLines { get; set; }
+        /// <summary>
+        /// 音乐
+        /// </summary>
+        public AudioClip music { get; set; }
     }
     /// <summary>
     /// 坐标转换，将官谱中的坐标转换为Re:PhiEdit中的坐标，方便统一计算
@@ -177,17 +181,22 @@ public class ChartReader : MonoBehaviour
         string chartString = File.ReadAllText(ChartFilePath);//读取到字符串
         dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//转换为json对象
         Chart chart = new Chart();//创建chart对象
+        chart.judgeLines = new List<JudgeLine>();//创建judgeLines列表
         if (chartJsonObject["formatVersion"].ToString() == "3")//检查格式，格式不正确将结束运行
         {
             for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//按照判定线数量运行i次
             {
                 JudgeLine judgeLine = new JudgeLine();
+                judgeLine.yMoves = new List<ChartEvents.YMove>();//创建yMove列表
+                judgeLine.xMoves = new List<ChartEvents.XMove>();//创建xMove列表
+                judgeLine.rotateChangeEvents = new List<ChartEvents.RotateChangeEvents>();//创建rotateChangeEvents列表
+                //judgeLine.disappearEvents = new List<ChartEvents.DisappearEvents>();//创建disappearEvents列表
                 float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                 for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
                 {
-                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
-                    float xValue = CoordinateTransformer.TransformX(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xValue
-                    float yValue = CoordinateTransformer.TransformY(chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yValue
+                    float time = CalculateOriginalTime((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    float xValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xValue
+                    float yValue = CoordinateTransformer.TransformY((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yValue
                     ChartEvents.XMove xMove = new ChartEvents.XMove(); xMove.time = time; xMove.value = xValue;
                     ChartEvents.YMove yMove = new ChartEvents.YMove(); yMove.time = time; yMove.value = yValue;
                     judgeLine.xMoves.Add(xMove); judgeLine.yMoves.Add(yMove);
@@ -195,8 +204,8 @@ public class ChartReader : MonoBehaviour
 
                 for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//读取所有角度事件
                 {
-                    float time = CalculateOriginalTime(chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
-                    float rotateValue = chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateValue
+                    float time = CalculateOriginalTime((float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    float rotateValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateValue
                     ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents(); rotateChangeEvents.time = time; rotateChangeEvents.value = rotateValue;
                     judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
                 }

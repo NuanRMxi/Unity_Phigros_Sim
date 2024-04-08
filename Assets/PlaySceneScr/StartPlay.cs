@@ -1,7 +1,4 @@
-
-
-
-
+using E7.Native;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +8,7 @@ public class StartPlay : MonoBehaviour
 {
     public RectTransform canvasRectTransform;//打击画布
     public Image Background_Board;//背景板
+    public GameObject JudgeLine;//判定线预制件
 
     // Start is called before the first frame update
     // 此方法会在第一帧前调用
@@ -85,13 +83,43 @@ public class StartPlay : MonoBehaviour
             factorX
         );
         // 在画布上设置新的位置
-        RectTransform judgeLineRectTransform; // 这是你的音符的RectTransform
-        
+        //RectTransform judgeLineRectTransform; // 这是你的音符的RectTransform
+
         //noteRectTransform.anchoredPosition = canvasPosition;
 
+        //获取当前unix时间戳，单位毫秒
+        float unixTime = (float)System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+        unixTime = unixTime + 3000f;
+        for (int i = 0; i < chart.judgeLines.Count; i++)
+        {
+            // 实例化预制件，位置为 (0, 0, 0)，旋转为零旋转
+            GameObject instance = Instantiate(JudgeLine, new Vector3(0, 0, 0), Quaternion.identity);
 
+            // 找到父 GameObject
+            GameObject parent = GameObject.Find("Canvas");
+            // 将实例化的预制件设置为父 GameObject 的子对象
+            instance.transform.SetParent(parent.transform);
 
-        
+            // 获取预制件的脚本组件
+            JudgeLineScr script = instance.GetComponent<JudgeLineScr>();
 
+            // 设置脚本中的公共变量
+            script.playStartUnixTime = unixTime;
+            script.judgeLine = chart.judgeLines[i];
+        }
+        //初始化
+        NativeAudio.Initialize();
+        //预加载音乐
+        NativeAudioPointer audioPointer;
+        audioPointer = NativeAudio.Load(chart.music);
+        NativeSource nS = new NativeSource();
+        while (true)
+        {
+            if (unixTime <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds)
+            {
+                break;
+            }
+        }
+        nS.Play(audioPointer);
     }
 }

@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugReadLog: {fileID: 1054705960}
-  ChartZipFilePath: {fileID: 0}
+  ChartZipFilePath: {fileID: 108191530}
 --- !u!1 &617512801
 GameObject:
   m_ObjectHideFlags: 0
