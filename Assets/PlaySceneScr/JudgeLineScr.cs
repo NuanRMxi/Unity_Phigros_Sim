@@ -21,6 +21,7 @@ public class JudgeLineScr : MonoBehaviour
     
     IEnumerator judgeLineEventReadAndMove()
     {
+        Debug.Log("获取成功，第一个旋转事件的time为:" + judgeLine.rotateChangeEvents[0].time);
         int yIndex = 0;
         int xIndex = 0;
         int rotateIndex = 0;
