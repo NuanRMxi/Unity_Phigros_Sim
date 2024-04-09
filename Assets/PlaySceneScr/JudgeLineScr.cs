@@ -4,7 +4,7 @@ using UnityEngine;
 public class JudgeLineScr : MonoBehaviour
 {
     public ChartReader.JudgeLine judgeLine;
-    public float playStartUnixTime;
+    public double playStartUnixTime;
     public RectTransform rectTransform;
     // Start is called before the first frame update
     void Start()
@@ -28,8 +28,8 @@ public class JudgeLineScr : MonoBehaviour
         while (true)
         {
             //获取当前unix时间戳，单位毫秒
-            float unixTime = (float)System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
-            float startToNow = unixTime - playStartUnixTime;
+            double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+            double startToNow = unixTime - playStartUnixTime;
             if (startToNow >= judgeLine.xMoves[xIndex].time)
             {
                 //设置判定线位置
