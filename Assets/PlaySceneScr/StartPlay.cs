@@ -38,7 +38,7 @@ public class StartPlay : MonoBehaviour
         
     }
 
-    IEnumerator WaitAndPlay(AudioSource aS, float time)
+    IEnumerator WaitAndPlay(AudioSource aS, double time)
     {
         while (true)
         {
@@ -54,13 +54,17 @@ public class StartPlay : MonoBehaviour
 
     public void DrawPlayScene(Chart chart)
     {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = chart.music;
+        audioSource.loop = false; //控制循环播放
+
         //获取当前unix时间戳，单位毫秒
-        float unixTime = (float)System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
-        unixTime = unixTime + 10f;
+        double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+        unixTime = unixTime + 10000f;
         for (int i = 0; i < chart.judgeLines.Count; i++)
         {
             // 实例化预制件，位置为 (0, 0, 0)，旋转为零旋转
-            GameObject instance = Instantiate(JudgeLine, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject instance = Instantiate(JudgeLine);//, new Vector3(0, 0, 0), Quaternion.identity);
 
             // 找到父 GameObject
             GameObject parent = GameObject.Find("Canvas");
@@ -77,15 +81,8 @@ public class StartPlay : MonoBehaviour
             script.playStartUnixTime = unixTime;
             script.judgeLine = chart.judgeLines[i];
         }
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = chart.music;
-        audioSource.loop = false; //控制循环播放
         StartCoroutine(WaitAndPlay(audioSource, unixTime));
         return;
-
-
-
-
 #if UNITY_ANDROID
         //初始化
         NativeAudio.Initialize();
