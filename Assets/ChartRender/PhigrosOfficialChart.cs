@@ -163,8 +163,9 @@ public class ChartReader : MonoBehaviour
     }
     public static float CalculateOriginalTime(float T, float bpm)
     {
-        float originalTime = (1.875f / bpm) * T;//结果为秒
+        float originalTime = (T / bpm) * 1.875f;//结果为秒
         originalTime = originalTime * 1000f;//转换为毫秒
+        //Debug.Log("谱面中原始数据:" + T.ToString() + "\n判定线原始BPM:" + bpm.ToString() + "\n转换结果(毫秒):" + originalTime.ToString());
         return originalTime;//返回
     }
 

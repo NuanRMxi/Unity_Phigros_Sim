@@ -144,7 +144,7 @@ public class MainBtnScrt : MonoBehaviour
             log.Add("致命错误..." + ex.Message);
         }
         //尽量写到本地目录
-        File.WriteAllLines("/storage/emulated/0/Download/Chart/" + "/log.txt", log.ToArray());
+        //File.WriteAllLines("/storage/emulated/0/Download/Chart/" + "/log.txt", log.ToArray());
     }
     /// <summary>
     /// 删除非空文件夹
