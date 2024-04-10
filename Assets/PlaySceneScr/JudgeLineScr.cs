@@ -9,6 +9,7 @@ public class JudgeLineScr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //调起协程，进行判定线事件读取
         StartCoroutine(judgeLineEventReadAndMove());
     }
 
@@ -18,7 +19,9 @@ public class JudgeLineScr : MonoBehaviour
         
     }
 
-    
+    /// <summary>
+    /// 判定线事件读取协程
+    /// </summary>
     IEnumerator judgeLineEventReadAndMove()
     {
         Debug.Log("获取成功，第一个旋转事件的time为:" + judgeLine.rotateChangeEvents[0].time);
