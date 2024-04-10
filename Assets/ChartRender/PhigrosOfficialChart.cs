@@ -21,39 +21,75 @@ public class ChartReader : MonoBehaviour
     }
     public class ChartEvents
     {
+        /// <summary>
+        /// X坐标移动事件
+        /// </summary>
         public class XMove
         {
             /// <summary>
-            /// 移动时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
+            /// 开始移动时间，单位毫秒
             /// </summary>
-            public double time { get; set; }
+            public double startTime { get; set; }
             /// <summary>
-            /// 即被移动到的X位置
+            /// 结束移动时间，单位毫秒
             /// </summary>
-            public float value { get; set; }
+            public double endTime { get; set; }
+            /// <summary>
+            /// 即被移动到的X位置起点
+            /// </summary>
+            public float startValue { get; set; }
+            /// <summary>
+            /// 即被移动到的X位置终点
+            /// </summary>
+            public float endValue { get; set; }
         }
+        /// <summary>
+        /// Y坐标移动事件
+        /// </summary>
         public class YMove
         {
             /// <summary>
-            /// 移动时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
+            /// 开始移动时间，单位毫秒
             /// </summary>
-            public double time { get; set; }
+            public double startTime { get; set; }
             /// <summary>
-            /// 即被移动到的Y位置
+            /// 结束移动时间，单位毫秒
             /// </summary>
-            public float value { get; set; }
+            public double endTime { get; set; }
+            /// <summary>
+            /// 移动Y位置起点
+            /// </summary>
+            public float startValue { get; set; }
+            /// <summary>
+            /// 移动Y位置终点
+            /// </summary>
+            public float endValue { get; set; }
         }
+        /// <summary>
+        /// 角度改变事件
+        /// </summary>
         public class RotateChangeEvents
         {
             /// <summary>
-            /// 旋转时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
+            /// 旋转开始时间，单位毫秒
             /// </summary>
-            public double time { get; set; }
+            public double startTime { get; set; }
             /// <summary>
-            /// 即被旋转到的角度
+            /// 旋转结束时间，单位毫秒
             /// </summary>
-            public float value { get; set; }
+            public double endTime { get; set; }
+            /// <summary>
+            /// 即开始时的角度
+            /// </summary>
+            public float startValue { get; set; }
+            /// <summary>
+            /// 即结束时的角度
+            /// </summary>
+            public float endValue { get; set; }
         }
+        /// <summary>
+        /// 透明度（消失）事件
+        /// </summary>
         public class DisappearEvents
         {
             /// <summary>
@@ -61,9 +97,13 @@ public class ChartReader : MonoBehaviour
             /// </summary>
             public double time { get; set; }
             /// <summary>
+            /// 即开始时的不透明度，0是完全透明，1是完全不透明
+            /// </summary>
+            public float startValue { get; set; }
+            /// <summary>
             /// 即被改变到的不透明度，0是完全透明，1是完全不透明
             /// </summary>
-            public float value { get; set; }
+            public float endValue { get; set; }
         }
         
     }
@@ -138,8 +178,6 @@ public class ChartReader : MonoBehaviour
     /// </summary>
     public class CoordinateTransformer
     {
-        private const float XMin = -675f;
-        private const float XMax = 675f;
         private const float YMin = -450f;
         private const float YMax = 450f;
         /// <summary>
@@ -149,8 +187,9 @@ public class ChartReader : MonoBehaviour
         /// <returns>Re:PhiEdit的X坐标</returns>
         public static float TransformX(float x)
         {
-            return x * (XMax - XMin) + XMin;
+            return (x - 0) / (1 - 0) * (675 - -675) + -675;
         }
+
         /// <summary>
         /// 提供官谱Y坐标，返回Re:PhiEdit中的X坐标
         /// </summary>
@@ -195,19 +234,55 @@ public class ChartReader : MonoBehaviour
                 float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                 for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
                 {
-                    double time = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
-                    float xValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xValue
-                    float yValue = CoordinateTransformer.TransformY((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yValue
-                    ChartEvents.XMove xMove = new ChartEvents.XMove(); xMove.time = time; xMove.value = xValue;
-                    ChartEvents.YMove yMove = new ChartEvents.YMove(); yMove.time = time; yMove.value = yValue;
+                    double startTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["startTime"], judgeLineBPM);//开始时间转换，单位为毫秒
+                    double endTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//结束时间转换，单位为毫秒
+                    if (startTime <= 0)
+                    {
+                        startTime = 0;
+                    }
+                    if (endTime >= 999999)
+                    {
+                        endTime = startTime;
+                    }
+                    float xStartValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["start"]);//读取start为xStartValue
+                    float xEndValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xEndValue
+                    ChartEvents.XMove xMove = new ChartEvents.XMove() {
+                        startTime = startTime,
+                        endTime = endTime,
+                        startValue = xStartValue,
+                        endValue = xEndValue
+                    };
+                    float yStartValue = CoordinateTransformer.TransformY((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["start2"]);//读取start2为yStartValue
+                    float yEndValue = CoordinateTransformer.TransformY((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yEndValue
+                    ChartEvents.YMove yMove = new ChartEvents.YMove() { 
+                        startTime = startTime,
+                        endTime = endTime,
+                        startValue = yStartValue,
+                        endValue = yEndValue
+                    };
                     judgeLine.xMoves.Add(xMove); judgeLine.yMoves.Add(yMove);
                 }
 
                 for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//读取所有角度事件
                 {
-                    double time = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
-                    float rotateValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateValue
-                    ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents(); rotateChangeEvents.time = time; rotateChangeEvents.value = rotateValue;
+                    double startTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["startTime"], judgeLineBPM);//转换开始时间，单位为毫秒
+                    double endTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换结束时间，单位为毫秒
+                    if (startTime <= 0)
+                    {
+                        startTime = 0;
+                    }
+                    if (endTime >= 999999)
+                    {
+                        endTime = startTime;
+                    }
+                    float rotateStartValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["start"];//读取start为rotateStartValue
+                    float rotateEndValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateEndValue
+                    ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents() { 
+                        startTime = startTime,
+                        endTime = endTime,
+                        startValue = rotateStartValue,
+                        endValue = rotateEndValue
+                    };
                     judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
                 }
                 chart.judgeLines.Add(judgeLine);

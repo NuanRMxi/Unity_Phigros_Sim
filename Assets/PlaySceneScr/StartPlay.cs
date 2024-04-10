@@ -64,7 +64,7 @@ public class StartPlay : MonoBehaviour
         for (int i = 0; i < chart.judgeLines.Count; i++)
         {
             // 实例化预制件，位置为 (0, 0, 0)，旋转为零旋转
-            GameObject instance = Instantiate(JudgeLine);//, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject instance = Instantiate(JudgeLine);
 
             // 找到父 GameObject
             GameObject parent = GameObject.Find("Canvas");
@@ -73,6 +73,10 @@ public class StartPlay : MonoBehaviour
 
             // 设置实例化的预制件的位置
             instance.transform.position = new Vector3(0, 0, 0f);
+
+            //设置预制件的位置位于画布中间
+            RectTransform prefabRectTransform = instance.GetComponent<RectTransform>();
+            prefabRectTransform.anchoredPosition = canvasRectTransform.rect.center;
 
             // 获取预制件的脚本组件
             JudgeLineScr script = instance.GetComponent<JudgeLineScr>();
