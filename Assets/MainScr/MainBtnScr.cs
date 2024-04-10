@@ -114,8 +114,8 @@ public class MainBtnScrt : MonoBehaviour
                 log.Add("能读到...\n开始转换...");
                 ChartReader.Chart chart = ChartReader.ChartConvert(TempFilePath + "/" + json["Chart"].ToString());
                 log.Add("转换结束...");
-                //AudioClip clip = Resources.Load<AudioClip>("116136");
-                AudioClip clip = Resources.Load<AudioClip>("DHQ");
+                AudioClip clip = Resources.Load<AudioClip>("116136");
+                //AudioClip clip = Resources.Load<AudioClip>("DHQ");
                 log.Add("debug音乐加载正常...");
                 //chart.music = Resources.Load<AudioClip>(TempFilePath + "/" + json["Song"].ToString());
                 chart.music = clip;
