@@ -26,7 +26,7 @@ public class ChartReader : MonoBehaviour
             /// <summary>
             /// 移动时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
             /// </summary>
-            public float time { get; set; }
+            public double time { get; set; }
             /// <summary>
             /// 即被移动到的X位置
             /// </summary>
@@ -37,7 +37,7 @@ public class ChartReader : MonoBehaviour
             /// <summary>
             /// 移动时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
             /// </summary>
-            public float time { get; set; }
+            public double time { get; set; }
             /// <summary>
             /// 即被移动到的Y位置
             /// </summary>
@@ -48,7 +48,7 @@ public class ChartReader : MonoBehaviour
             /// <summary>
             /// 旋转时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
             /// </summary>
-            public float time { get; set; }
+            public double time { get; set; }
             /// <summary>
             /// 即被旋转到的角度
             /// </summary>
@@ -59,7 +59,7 @@ public class ChartReader : MonoBehaviour
             /// <summary>
             /// 透明度改变时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
             /// </summary>
-            public float time { get; set; }
+            public double time { get; set; }
             /// <summary>
             /// 即被改变到的不透明度，0是完全透明，1是完全不透明
             /// </summary>
@@ -161,10 +161,10 @@ public class ChartReader : MonoBehaviour
             return y * (YMax - YMin) + YMin;
         }
     }
-    public static float CalculateOriginalTime(float T, float bpm)
+    public static double CalculateOriginalTime(double T, float bpm)
     {
-        float originalTime = (T / bpm) * 1.875f;//结果为秒
-        originalTime = originalTime * 1000f;//转换为毫秒
+        double originalTime = (T / bpm) * 1.875;//结果为秒
+        originalTime = originalTime * 1000;//转换为毫秒
         //Debug.Log("谱面中原始数据:" + T.ToString() + "\n判定线原始BPM:" + bpm.ToString() + "\n转换结果(毫秒):" + originalTime.ToString());
         return originalTime;//返回
     }
@@ -195,7 +195,7 @@ public class ChartReader : MonoBehaviour
                 float judgeLineBPM = chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                 for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
                 {
-                    float time = CalculateOriginalTime((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    double time = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
                     float xValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xValue
                     float yValue = CoordinateTransformer.TransformY((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end2"]);//读取end2为yValue
                     ChartEvents.XMove xMove = new ChartEvents.XMove(); xMove.time = time; xMove.value = xValue;
@@ -205,7 +205,7 @@ public class ChartReader : MonoBehaviour
 
                 for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//读取所有角度事件
                 {
-                    float time = CalculateOriginalTime((float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
+                    double time = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["endTime"], judgeLineBPM);//转换时间，单位为毫秒
                     float rotateValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateValue
                     ChartEvents.RotateChangeEvents rotateChangeEvents = new ChartEvents.RotateChangeEvents(); rotateChangeEvents.time = time; rotateChangeEvents.value = rotateValue;
                     judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
