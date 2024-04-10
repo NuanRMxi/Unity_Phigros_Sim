@@ -6,6 +6,7 @@ public class JudgeLineScr : MonoBehaviour
     public ChartReader.JudgeLine judgeLine;
     public double playStartUnixTime;
     public RectTransform rectTransform;
+    public int whoami = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +75,11 @@ public class JudgeLineScr : MonoBehaviour
                 yield return null;
             }
             rTf.anchoredPosition = new Vector3(endXValue, transform.position.y, transform.position.z);
+            if (whoami == 0)
+            {
+                Debug.Log("参数传递start:" + startXValue + "\nend:" + endXValue + "\n实际位置:" + rTf.anchoredPosition);
+            }
+            
         }
         /// <summary>
         /// 移动Y轴

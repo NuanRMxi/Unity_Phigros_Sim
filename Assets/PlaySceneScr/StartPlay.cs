@@ -84,6 +84,7 @@ public class StartPlay : MonoBehaviour
             // 设置脚本中的公共变量
             script.playStartUnixTime = unixTime;
             script.judgeLine = chart.judgeLines[i];
+            script.whoami = i;
         }
         StartCoroutine(WaitAndPlay(audioSource, unixTime));
         return;
