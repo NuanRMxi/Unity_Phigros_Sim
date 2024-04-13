@@ -218,11 +218,21 @@ public class ChartReader : MonoBehaviour
     /// </param>
     static public Chart ChartConvert(string ChartFilePath)
     {
+        if (ChartFilePath == null)
+        {
+            //你他妈给我传了个什么给我
+            return null;
+        }
         string chartString = File.ReadAllText(ChartFilePath);//读取到字符串
         dynamic chartJsonObject = JsonConvert.DeserializeObject<dynamic>(chartString);//转换为json对象
         Chart chart = new Chart();//创建chart对象
         chart.judgeLines = new List<JudgeLine>();//创建judgeLines列表
-        if (chartJsonObject["formatVersion"].ToString() == "3")//检查格式，格式不正确将结束运行
+        if (chartJsonObject == null)
+        {
+            //你他妈又导入了个什么给我
+            return null;
+        }
+        else if (chartJsonObject["formatVersion"].ToString() == "3")//检查格式，格式不正确将结束运行
         {
             for (int i = 0; i < chartJsonObject["judgeLineList"].Count; i++)//按照判定线数量运行i次
             {

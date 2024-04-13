@@ -38,7 +38,7 @@ public class StartPlay : MonoBehaviour
         
     }
 
-    IEnumerator WaitAndPlay(AudioSource aS, double time)
+    IEnumerator DebugWaitAndPlay(AudioSource aS, double time)
     {
         while (true)
         {
@@ -51,12 +51,39 @@ public class StartPlay : MonoBehaviour
             yield return null;
         }
     }
-
+    IEnumerator WindowsWaitAndPlay(AudioSource aS, double time)
+    {
+        while (true)
+        {
+            TimeReads.text = "NowTime:" + (System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds - time).ToString();
+            if (time <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds && !MusicisPlay)
+            {
+                MusicisPlay = true;
+                aS.Play();
+            }
+            yield return null;
+        }
+    }
+    IEnumerator AndroidWaitAndPlay(AudioClip music, double time)
+    {
+        //预加载音乐
+        AudioClip aC = music;
+        NativeAudioPointer audioPointer;
+        audioPointer = NativeAudio.Load(aC);
+        NativeSource nS = new NativeSource();
+        while (true)
+        {
+            TimeReads.text = "NowTime:" + (System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds - time).ToString();
+            if (time <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds && !MusicisPlay)
+            {
+                MusicisPlay = true;
+                nS.Play(audioPointer);
+            }
+            yield return null;
+        }
+    }
     public void DrawPlayScene(Chart chart)
     {
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = chart.music;
-        audioSource.loop = false; //控制循环播放
 
         //获取当前unix时间戳，单位毫秒
         double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
@@ -86,35 +113,21 @@ public class StartPlay : MonoBehaviour
             script.judgeLine = chart.judgeLines[i];
             script.whoami = i;
         }
-        StartCoroutine(WaitAndPlay(audioSource, unixTime));
-        return;
-#if UNITY_ANDROID
-        //初始化
-        NativeAudio.Initialize();
-        //预加载音乐
-        NativeAudioPointer audioPointer;
-        audioPointer = NativeAudio.Load(chart.music);
-        NativeSource nS = new NativeSource();
-        while (true)
-        {
-            if (unixTime <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds)
-            {
-                break;
-            }
-        }
-        nS.Play(audioPointer);
-#elif UNITY_EDITOR_WIN
+#if UNITY_EDITOR
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = chart.music;
         audioSource.loop = false; //控制循环播放
-        while (true)
-        {
-            if (unixTime <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds)
-            {
-                break;
-            }
-        }
-        audioSource.Play();
+        StartCoroutine(DebugWaitAndPlay(audioSource, unixTime));
+#elif UNITY_ANDROID
+        //初始化
+        NativeAudio.Initialize();
+        //调用方法准备播放
+        StartCoroutine(AndroidWaitAndPlay(chart.music, unixTime));
+#elif UNITY_STANDALONE_WIN
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = chart.music;
+        audioSource.loop = false; //控制循环播放
+        StartCoroutine(WindowsWaitAndPlay(audioSource, unixTime));
 #endif
     }
 }
