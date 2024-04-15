@@ -161,6 +161,10 @@ public class ChartReader : MonoBehaviour
     public class Chart
     {
         /// <summary>
+        /// 谱面版本
+        /// </summary>
+        public int chartVersion { get; set; }
+        /// <summary>
         /// 曲绘
         /// </summary>
         public Image Illustration { get; set; }
@@ -178,6 +182,8 @@ public class ChartReader : MonoBehaviour
     /// </summary>
     public class CoordinateTransformer
     {
+        private const float XMin = -675f;
+        private const float XMax = 675f;
         private const float YMin = -450f;
         private const float YMax = 450f;
         /// <summary>
@@ -187,7 +193,8 @@ public class ChartReader : MonoBehaviour
         /// <returns>Re:PhiEdit的X坐标</returns>
         public static float TransformX(float x)
         {
-            return (x - 0) / (1 - 0) * (675 - -675) + -675;
+            //return (x - 0) / (1 - 0) * (675 - -675) + -675;
+            return x * (XMax - XMin) + XMin;
         }
 
         /// <summary>
@@ -297,6 +304,7 @@ public class ChartReader : MonoBehaviour
                 }
                 chart.judgeLines.Add(judgeLine);
             }
+            chart.chartVersion = (int)chartJsonObject["formatVersion"];
             return chart;//返回谱面
         }
         else

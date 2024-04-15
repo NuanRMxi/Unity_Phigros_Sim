@@ -33,19 +33,19 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (startToNow >= judgeLine.xMoves[xIndex].startTime)
+            if (startToNow >= judgeLine.xMoves[xIndex].startTime && xIndex < judgeLine.xMoves.Count)
             {
                 //设置判定线位置
                 StartCoroutine(MoveXOverTime(rectTransform, judgeLine.xMoves[xIndex].startValue, judgeLine.xMoves[xIndex].endValue, (float)(judgeLine.xMoves[xIndex].endTime - judgeLine.xMoves[xIndex].startTime) / 1000));
                 xIndex++;
             }
-            if (startToNow >= judgeLine.yMoves[yIndex].startTime)
+            if (startToNow >= judgeLine.yMoves[yIndex].startTime && yIndex < judgeLine.yMoves.Count)
             {
                 //设置判定线位置
                 StartCoroutine(MoveYOverTime(rectTransform, judgeLine.yMoves[yIndex].startValue, judgeLine.yMoves[yIndex].endValue, (float)(judgeLine.yMoves[yIndex].endTime - judgeLine.yMoves[yIndex].startTime) / 1000));
                 yIndex++;
             }
-            if (startToNow >= judgeLine.rotateChangeEvents[rotateIndex].startTime)
+            if (startToNow >= judgeLine.rotateChangeEvents[rotateIndex].startTime && rotateIndex < judgeLine.rotateChangeEvents.Count)
             {
                 //设置判定线角度
                 StartCoroutine(RotateOverTime(rectTransform, judgeLine.rotateChangeEvents[rotateIndex].startValue, judgeLine.rotateChangeEvents[rotateIndex].endValue, (float)(judgeLine.rotateChangeEvents[rotateIndex].endTime - judgeLine.rotateChangeEvents[rotateIndex].startTime) / 1000));

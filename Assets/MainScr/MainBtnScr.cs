@@ -37,7 +37,20 @@ public class MainBtnScrt : MonoBehaviour
     {
 
     }
-    public void OnClick()
+    public void PlayButtonOnClick()
+    {
+        if (ChartCache.Instance.chart.chartVersion != 0)
+        {
+            //切换场景
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            DebugReadLog.text = "请先选取并加载文件，否则无法直接加载";
+        }
+    }
+
+    public void LoadButtonOnClick()
     {
         try
         {
@@ -57,7 +70,7 @@ public class MainBtnScrt : MonoBehaviour
                 goto RPW;
             }
             string TempFilePath = Application.persistentDataPath + "/ChartTemp";
-#elif PLATFORM_WINDOWS
+#elif UNITY_STANDALONE_WIN
             string TempFilePath = Application.dataPath + "/ChartTemp";
 #endif
             try
@@ -106,9 +119,6 @@ public class MainBtnScrt : MonoBehaviour
             {
                 UnityEngine.Debug.Log(ex.ToString());
             }
-            //切换场景
-                SceneManager.LoadScene(1);
-            
         }
         catch (Exception ex)
         {
