@@ -1,0 +1,87 @@
+
+[DEBUG-2024-04-16 13:35:24] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 13:35:24] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 13:35:24] 缓存文件清理完成
+[DEBUG-2024-04-16 13:35:24] 文件释放成功
+[FATAL-2024-04-16 13:35:24] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Newtonsoft.Json.Linq.JObject' does not contain a definition for 'Chart'
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0) [0x00112] in <26107660109d4979b8a8147c70c0153d>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 13:37:10] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 13:37:10] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 13:37:10] 缓存文件清理完成
+[DEBUG-2024-04-16 13:37:10] 文件释放成功
+[FATAL-2024-04-16 13:37:13] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type 'Newtonsoft.Json.Linq.JValue' to 'float'. An explicit conversion exists (are you missing a cast?)
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0) [0x00112] in <26107660109d4979b8a8147c70c0153d>:0 
+  at ChartReader.ChartConvert (System.String ChartFilePath) [0x001e6] in D:\UnityProject\Phigros_Sim\Assets\ChartRender\PhigrosOfficialChart.cs:252 
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0, T1 arg1) [0x0011d] in <26107660109d4979b8a8147c70c0153d>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 14:50:41] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 14:50:41] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 14:50:41] 缓存文件清理完成
+[DEBUG-2024-04-16 14:50:42] 文件释放成功
+[FATAL-2024-04-16 14:50:44] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type 'Newtonsoft.Json.Linq.JValue' to 'float'. An explicit conversion exists (are you missing a cast?)
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0) [0x00112] in <26107660109d4979b8a8147c70c0153d>:0 
+  at ChartReader.ChartConvert (System.String ChartFilePath) [0x001e6] in D:\UnityProject\Phigros_Sim\Assets\ChartRender\PhigrosOfficialChart.cs:252 
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0, T1 arg1) [0x0011d] in <26107660109d4979b8a8147c70c0153d>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 14:52:28] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 14:52:28] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 14:52:28] 缓存文件清理完成
+[DEBUG-2024-04-16 14:52:28] 文件释放成功
+[FATAL-2024-04-16 14:52:31] 我没归类，反正结果是这样的：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type 'Newtonsoft.Json.Linq.JValue' to 'float'. An explicit conversion exists (are you missing a cast?)
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0) [0x00112] in <26107660109d4979b8a8147c70c0153d>:0 
+  at ChartReader.ChartConvert (System.String ChartFilePath) [0x001e7] in D:\UnityProject\Phigros_Sim\Assets\ChartRender\PhigrosOfficialChart.cs:255 
+[FATAL-2024-04-16 14:52:31] 读写配置文件时出现致命错误，日志为：System.NullReferenceException: Object reference not set to an instance of an object
+  at MainBtnScrt.LoadButtonOnClick () [0x00302] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:117 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 14:53:41] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 14:53:41] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 14:53:41] 缓存文件清理完成
+[DEBUG-2024-04-16 14:53:41] 文件释放成功
+[INFO-2024-04-16 14:53:44] 转谱结束，共有System.Collections.Generic.List`1[ChartReader+JudgeLine]条判定线
+[FATAL-2024-04-16 14:53:44] 读写配置文件时出现致命错误，日志为：System.NullReferenceException: Object reference not set to an instance of an object
+  at MainBtnScrt.LoadButtonOnClick () [0x0030c] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:118 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 14:54:57] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 14:54:57] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 14:54:58] 缓存文件清理完成
+[DEBUG-2024-04-16 14:54:58] 文件释放成功
+[INFO-2024-04-16 14:55:02] 转谱结束，共有System.Collections.Generic.List`1[ChartReader+JudgeLine]条判定线
+[DEBUG-2024-04-16 14:55:02] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
+[DEBUG-2024-04-16 15:10:10] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 15:10:10] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 15:10:10] 缓存文件清理完成
+[DEBUG-2024-04-16 15:10:10] 文件释放成功
+[FATAL-2024-04-16 15:10:11] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Newtonsoft.Json.Linq.JValue' does not contain a definition for 'ToSafeString'
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet] (System.Runtime.CompilerServices.CallSite site, T0 arg0) [0x00112] in <26107660109d4979b8a8147c70c0153d>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 15:13:08] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 15:13:08] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 15:13:08] 缓存文件清理完成
+[DEBUG-2024-04-16 15:13:08] 文件释放成功
+[FATAL-2024-04-16 15:13:08] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Newtonsoft.Json.Linq.JValue' does not contain a definition for 'ToSafeString'
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 15:13:09] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 15:13:09] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 15:13:09] 缓存文件清理完成
+[DEBUG-2024-04-16 15:13:10] 文件释放成功
+[FATAL-2024-04-16 15:13:10] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Newtonsoft.Json.Linq.JValue' does not contain a definition for 'ToSafeString'
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 15:13:10] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 15:13:10] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 15:13:10] 缓存文件清理完成
+[DEBUG-2024-04-16 15:13:11] 文件释放成功
+[FATAL-2024-04-16 15:13:11] 读写配置文件时出现致命错误，日志为：Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Newtonsoft.Json.Linq.JValue' does not contain a definition for 'ToSafeString'
+  at (wrapper dynamic-method) System.Object.CallSite.Target(System.Runtime.CompilerServices.Closure,System.Runtime.CompilerServices.CallSite,object)
+  at MainBtnScrt.LoadButtonOnClick () [0x0014f] in D:\UnityProject\Phigros_Sim\Assets\MainScr\MainBtnScr.cs:113 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-16 16:01:00] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-16 16:01:00] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-16 16:01:00] 缓存文件清理完成
+[DEBUG-2024-04-16 16:01:00] 文件释放成功
+[INFO-2024-04-16 16:01:02] 转谱结束，共有System.Collections.Generic.List`1[ChartReader+JudgeLine]条判定线
+[DEBUG-2024-04-16 16:01:02] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
