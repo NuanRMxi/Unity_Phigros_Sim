@@ -49,8 +49,15 @@ public class LogWirte : MonoBehaviour
             switch (type)
             {
                 case LogType.Debug:
-                    now = now + "[DEBUG-" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] " + msg;
-                    break;
+                    if (ChartCache.Instance.debugMode)
+                    {
+                        now = now + "[DEBUG-" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] " + msg;
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 case LogType.Info:
                     now = now + "[INFO-" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] " + msg;
                     break;

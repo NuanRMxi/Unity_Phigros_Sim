@@ -11,7 +11,9 @@ public class JudgeLineScr : MonoBehaviour
     void Start()
     {
         //调起协程，进行判定线事件读取
-        StartCoroutine(judgeLineEventReadAndMove());
+        StartCoroutine(judgeLineXEventReadAndMove());
+        StartCoroutine(judgeLineYEventReadAndMove());
+        StartCoroutine(judgeLineREventReadAndMove());
     }
 
     // Update is called once per frame
@@ -19,41 +21,65 @@ public class JudgeLineScr : MonoBehaviour
     {
         
     }
-
     /// <summary>
-    /// 判定线事件读取协程
+    /// X轴移动事件读取
     /// </summary>
-    IEnumerator judgeLineEventReadAndMove()
+    IEnumerator judgeLineXEventReadAndMove()
     {
-        int yIndex = 0;
-        int xIndex = 0;
-        int rotateIndex = 0;
+        int Index = 0;
         while (true)
         {
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (startToNow >= judgeLine.xMoves[xIndex].startTime && xIndex < judgeLine.xMoves.Count)
+            if (startToNow >= judgeLine.xMoves[Index].startTime && Index <= judgeLine.xMoves.Count)
             {
                 //设置判定线位置
-                StartCoroutine(MoveXOverTime(rectTransform, judgeLine.xMoves[xIndex].startValue, judgeLine.xMoves[xIndex].endValue, (float)(judgeLine.xMoves[xIndex].endTime - judgeLine.xMoves[xIndex].startTime) / 1000));
-                xIndex++;
-            }
-            if (startToNow >= judgeLine.yMoves[yIndex].startTime && yIndex < judgeLine.yMoves.Count)
-            {
-                //设置判定线位置
-                StartCoroutine(MoveYOverTime(rectTransform, judgeLine.yMoves[yIndex].startValue, judgeLine.yMoves[yIndex].endValue, (float)(judgeLine.yMoves[yIndex].endTime - judgeLine.yMoves[yIndex].startTime) / 1000));
-                yIndex++;
-            }
-            if (startToNow >= judgeLine.rotateChangeEvents[rotateIndex].startTime && rotateIndex < judgeLine.rotateChangeEvents.Count)
-            {
-                //设置判定线角度
-                StartCoroutine(RotateOverTime(rectTransform, judgeLine.rotateChangeEvents[rotateIndex].startValue, judgeLine.rotateChangeEvents[rotateIndex].endValue, (float)(judgeLine.rotateChangeEvents[rotateIndex].endTime - judgeLine.rotateChangeEvents[rotateIndex].startTime) / 1000));
-                rotateIndex++;
+                StartCoroutine(MoveXOverTime(rectTransform, judgeLine.xMoves[Index].startValue, judgeLine.xMoves[Index].endValue, (float)(judgeLine.xMoves[Index].endTime - judgeLine.xMoves[Index].startTime) / 1000));
+                Index++;
             }
             yield return null;
         }
-        
+    }
+    /// <summary>
+    /// Y轴移动事件读取
+    /// </summary>
+    IEnumerator judgeLineYEventReadAndMove()
+    {
+        int Index = 0;
+        while (true)
+        {
+            //获取当前unix时间戳，单位毫秒
+            double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+            double startToNow = unixTime - playStartUnixTime;
+            if (startToNow >= judgeLine.yMoves[Index].startTime && Index <= judgeLine.yMoves.Count)
+            {
+                //设置判定线位置
+                StartCoroutine(MoveYOverTime(rectTransform, judgeLine.yMoves[Index].startValue, judgeLine.yMoves[Index].endValue, (float)(judgeLine.yMoves[Index].endTime - judgeLine.yMoves[Index].startTime) / 1000));
+                Index++;
+            }
+            yield return null;
+        }
+    }
+    /// <summary>
+    /// 旋转事件读取
+    /// </summary>
+    IEnumerator judgeLineREventReadAndMove()
+    {
+        int Index = 0;
+        while (true)
+        {
+            //获取当前unix时间戳，单位毫秒
+            double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+            double startToNow = unixTime - playStartUnixTime;
+            if (startToNow >= judgeLine.rotateChangeEvents[Index].startTime && Index <= judgeLine.rotateChangeEvents.Count)
+            {
+                //设置判定线角度
+                StartCoroutine(RotateOverTime(rectTransform, judgeLine.rotateChangeEvents[Index].startValue, judgeLine.rotateChangeEvents[Index].endValue, (float)(judgeLine.rotateChangeEvents[Index].endTime - judgeLine.rotateChangeEvents[Index].startTime) / 1000));
+                Index++;
+            }
+            yield return null;
+        }
     }
     /// <summary>
     /// 移动X轴
