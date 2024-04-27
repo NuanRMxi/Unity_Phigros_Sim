@@ -48,6 +48,8 @@ public class MainBtnScrt : MonoBehaviour
 #if UNITY_EDITOR_WIN
             string TempFilePath = Application.dataPath + "/ChartTemp";
             LogWriter.Write("检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：" + TempFilePath, LogWriter.LogType.Debug);
+            //使用预设谱面文件
+            ChartZipFilePath.text = "D:\\PhiOfaChart\\A39sdy.zip";
 #elif UNITY_ANDROID
             LogWriter.Write("检测当前环境为ANDROID，申请基础权限",LogWriter.LogType.Debug);
             RPR:
@@ -114,6 +116,7 @@ public class MainBtnScrt : MonoBehaviour
                 var json = JSON.Parse(File.ReadAllText(TempFilePath + "/config.json"));
                 ChartReader.Chart chart = ChartReader.ChartConvert(TempFilePath + "/" + json["Chart"]);
                 AudioClip clip = Resources.Load<AudioClip>("116136");
+                clip.LoadAudioData();
                 //AudioClip clip = Resources.Load<AudioClip>("DHQ");
                 //chart.music = Resources.Load<AudioClip>(TempFilePath + "/" + json["Song"].ToString());
                 chart.music = clip;

@@ -109,3 +109,39 @@
 [DEBUG-2024-04-22 23:27:03] 文件释放成功
 [INFO-2024-04-22 23:27:05] 转谱结束，共有24条判定线
 [DEBUG-2024-04-22 23:27:05] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
+[DEBUG-2024-04-27 23:49:03] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-27 23:49:03] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-27 23:49:03] 缓存文件清理完成
+[FATAL-2024-04-27 23:49:03] 解压时出现致命错误，日志为：System.ArgumentException: Empty file name is not legal.
+Parameter name: sourceFileName
+  at System.IO.File.Copy (System.String sourceFileName, System.String destFileName, System.Boolean overwrite) [0x0002e] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x000b4] in D:\UnityProject\Phigros_Sim\Assets\Scripts\MainScr\MainBtnScr.cs:99 
+[FATAL-2024-04-27 23:49:03] 读写配置文件时出现致命错误，日志为：System.IO.FileNotFoundException: Could not find file "D:\UnityProject\Phigros_Sim\Assets\ChartTemp\config.json"
+File name: 'D:\UnityProject\Phigros_Sim\Assets\ChartTemp\config.json'
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks, System.Int32 bufferSize) [0x00055] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks) [0x00000] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamReader..ctor(string,System.Text.Encoding,bool)
+  at System.IO.File.InternalReadAllText (System.String path, System.Text.Encoding encoding) [0x00000] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at System.IO.File.ReadAllText (System.String path) [0x0002c] in <f843d796055e4deaa447e7ba073cff5f>:0 
+  at MainBtnScrt.LoadButtonOnClick () [0x00138] in D:\UnityProject\Phigros_Sim\Assets\Scripts\MainScr\MainBtnScr.cs:114 配置文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp/config.json
+[DEBUG-2024-04-27 23:52:07] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-27 23:52:07] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-27 23:52:07] 缓存文件清理完成
+[DEBUG-2024-04-27 23:52:07] 文件释放成功
+[INFO-2024-04-27 23:52:09] 转谱结束，共有24条判定线
+[DEBUG-2024-04-27 23:52:09] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
+[DEBUG-2024-04-27 23:57:00] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-27 23:57:00] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-27 23:57:00] 缓存文件清理完成
+[DEBUG-2024-04-27 23:57:00] 文件释放成功
+[INFO-2024-04-27 23:57:02] 转谱结束，共有24条判定线
+[DEBUG-2024-04-27 23:57:02] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
+[DEBUG-2024-04-28 00:02:24] 加载按钮被点击，开始加载流程
+[DEBUG-2024-04-28 00:02:24] 检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：D:/UnityProject/Phigros_Sim/Assets/ChartTemp
+[INFO-2024-04-28 00:02:24] 缓存文件清理完成
+[DEBUG-2024-04-28 00:02:24] 文件释放成功
+[INFO-2024-04-28 00:02:26] 转谱结束，共有24条判定线
+[DEBUG-2024-04-28 00:02:27] 读取配置文件成功，谱面转换工作结束，谱面信息：3，等待加载
