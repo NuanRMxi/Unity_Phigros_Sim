@@ -37,20 +37,6 @@ public class StartPlay : MonoBehaviour
     {
         
     }
-
-    IEnumerator DebugWaitAndPlay(AudioSource aS, double time)
-    {
-        while (true)
-        {
-            TimeReads.text = "NowTime:" + (System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds - time).ToString();
-            if (time <= System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds && !MusicisPlay)
-            {
-                MusicisPlay = true;
-                aS.Play();
-            }
-            yield return null;
-        }
-    }
     IEnumerator WindowsWaitAndPlay(AudioSource aS, double time)
     {
         while (true)
@@ -112,12 +98,14 @@ public class StartPlay : MonoBehaviour
             script.playStartUnixTime = unixTime;
             script.judgeLine = chart.judgeLines[i];
             script.whoami = i;
+            //SpriteRenderer sprRend = instance.GetComponent<SpriteRenderer>();
+            //sprRend.size = new Vector2(6220.8f, 8.11f);
         }
 #if UNITY_EDITOR
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = chart.music;
         audioSource.loop = false; //控制循环播放
-        StartCoroutine(DebugWaitAndPlay(audioSource, unixTime));
+        StartCoroutine(WindowsWaitAndPlay(audioSource, unixTime));
 #elif UNITY_ANDROID
         //初始化
         NativeAudio.Initialize();

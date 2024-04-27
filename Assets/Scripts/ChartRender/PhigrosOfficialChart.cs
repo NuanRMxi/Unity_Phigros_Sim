@@ -7,6 +7,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using static LogWirte;
 using System;
+using EasyUI.Toast;
 
 public class ChartReader : MonoBehaviour
 {
@@ -95,9 +96,13 @@ public class ChartReader : MonoBehaviour
         public class DisappearEvents
         {
             /// <summary>
-            /// 透明度改变时间，当前为关键帧实现，所以没有开始与结束，只有发生时间，单位毫秒
+            /// 透明度改变开始时间
             /// </summary>
-            public double time { get; set; }
+            public double startTime { get; set; }
+            /// <summary>
+            /// 透明度改变结束时间
+            /// </summary>
+            public double endTime { get; set; }
             /// <summary>
             /// 即开始时的不透明度，0是完全透明，1是完全不透明
             /// </summary>
@@ -251,7 +256,7 @@ public class ChartReader : MonoBehaviour
                     judgeLine.yMoves = new List<ChartEvents.YMove>();//创建yMove列表
                     judgeLine.xMoves = new List<ChartEvents.XMove>();//创建xMove列表
                     judgeLine.rotateChangeEvents = new List<ChartEvents.RotateChangeEvents>();//创建rotateChangeEvents列表
-                                                                                              //judgeLine.disappearEvents = new List<ChartEvents.DisappearEvents>();//创建disappearEvents列表
+                    judgeLine.disappearEvents = new List<ChartEvents.DisappearEvents>();//创建disappearEvents列表
                     float judgeLineBPM = (float)chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                     for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
                     {
@@ -285,7 +290,7 @@ public class ChartReader : MonoBehaviour
                         };
                         judgeLine.xMoves.Add(xMove); judgeLine.yMoves.Add(yMove);
                     }
-
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的Move事件转换结束，共有" + judgeLine.xMoves.Count + "个Move事件", LogWriter.LogType.Debug);
                     for (int rotateEventIndex = 0; rotateEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"].Count; rotateEventIndex++)//读取所有角度事件
                     {
                         double startTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["startTime"], judgeLineBPM);//转换开始时间，单位为毫秒
@@ -309,10 +314,36 @@ public class ChartReader : MonoBehaviour
                         };
                         judgeLine.rotateChangeEvents.Add(rotateChangeEvents);
                     }
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的rotate事件转换结束，共有" + judgeLine.rotateChangeEvents.Count + "个rotate事件", LogWriter.LogType.Debug);
+                    for (int AlphaEventIndex = 0; AlphaEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"].Count; AlphaEventIndex++)
+                    {
+                        double startTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["startTime"], judgeLineBPM);
+                        double endTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["endTime"], judgeLineBPM);
+                        if (startTime <= 0)
+                        {
+                            startTime = 0;
+                        }
+                        if (endTime >= 999999)
+                        {
+                            endTime = startTime;
+                        }
+                        float alphaStartValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["start"];
+                        float alphaEndValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["end"];
+                        ChartEvents.DisappearEvents disappearEvents = new ChartEvents.DisappearEvents()
+                        {
+                            startTime = startTime,
+                            endTime = endTime,
+                            startValue = alphaStartValue,
+                            endValue = alphaEndValue
+                        };
+                        judgeLine.disappearEvents.Add(disappearEvents);
+                    }
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的Alpha事件转换结束，共有" + judgeLine.disappearEvents.Count + "个Alpha事件", LogWriter.LogType.Debug);
                     chart.judgeLines.Add(judgeLine);
                 }
                 chart.chartVersion = (int)chartJsonObject["formatVersion"];
                 LogWriter.Write("转谱结束，共有" + chart.judgeLines.Count.ToString() + "条判定线", LogWriter.LogType.Info);
+                Toast.Show("转谱结束，共有" + chart.judgeLines.Count.ToString() + "条判定线");
                 return chart;//返回谱面
             }
             else

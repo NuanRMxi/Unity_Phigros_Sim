@@ -14,6 +14,7 @@ public class JudgeLineScr : MonoBehaviour
         StartCoroutine(judgeLineXEventReadAndMove());
         StartCoroutine(judgeLineYEventReadAndMove());
         StartCoroutine(judgeLineREventReadAndMove());
+        StartCoroutine(judgeLineDEventReadAndFade());
     }
 
     // Update is called once per frame
@@ -81,10 +82,28 @@ public class JudgeLineScr : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator judgeLineDEventReadAndFade()
+    {
+        int Index = 0;
+        while (true)
+        {
+            //获取当前unix时间戳，单位毫秒
+            double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+            double startToNow = unixTime - playStartUnixTime;
+            if (startToNow >= judgeLine.disappearEvents[Index].startTime && Index <= judgeLine.disappearEvents.Count)
+            {
+                //使判定线渐变
+                StartCoroutine(FadeTo(judgeLine.disappearEvents[Index].startValue, judgeLine.disappearEvents[Index].endValue,(judgeLine.disappearEvents[Index].endTime - judgeLine.disappearEvents[Index].startTime) / 1000));
+                Index++;
+            }
+            yield return null;
+        }
+    }
+
     /// <summary>
     /// 移动X轴
     /// </summary>
-    /// <param name="rTf"></param><summary>GameObject的RectTransform</summary>
+    /// <param name="rTf"></param><summary>判定线的RectTransform</summary>
     /// <param name="startXValue"></param><summary>开始X坐标</summary>
     /// <param name="endXValue"></param><summary>结束X坐标</summary>
     /// <param name="duration"></param><summary>移动时间（单位为秒）</summary>
@@ -101,7 +120,7 @@ public class JudgeLineScr : MonoBehaviour
     /// <summary>
     /// 移动Y轴
     /// </summary>
-    /// <param name="rTf"></param><summary>GameObject的RectTransform</summary>
+    /// <param name="rTf"></param><summary>判定线的RectTransform</summary>
     /// <param name="startXValue"></param><summary>开始Y坐标</summary>
     /// <param name="endXValue"></param><summary>结束Y坐标</summary>
     /// <param name="duration"></param><summary>移动时间（单位为秒）</summary>
@@ -119,7 +138,7 @@ public class JudgeLineScr : MonoBehaviour
     /// <summary>
     /// 旋转
     /// </summary>
-    /// <param name="objectToRotate"></param><summary>要旋转的GameObject的RectTransform</summary>
+    /// <param name="objectToRotate"></param><summary>要旋转的判定线的RectTransform</summary>
     /// <param name="startRotate"></param><summary>开始旋转角度</summary>
     /// <param name="endRotate"></param><summary>结束旋转角度</summary>
     /// <param name="duration"></param><summary>旋转时间（单位为秒）</summary>
@@ -134,6 +153,33 @@ public class JudgeLineScr : MonoBehaviour
             yield return null;
         }
         rTf.transform.rotation = Quaternion.Euler(0, 0, endRotate);
+    }
+    /// <summary>
+    /// 透明度
+    /// </summary>
+    /// <param name="startOpacity"></param><summary>开始时的透明度</summary>
+    /// <param name="targetOpacity"></param><summary>结束时的透明度</summary>
+    /// <param name="duration"></param><summary>渐变时间（单位为秒）</summary>
+    /// <returns></returns>
+    IEnumerator FadeTo(float startOpacity, float targetOpacity, double duration)
+    {
+        // 计算总时间
+        float time = 0;
+        while (time < duration)
+        {
+            // 更新时间
+            time += Time.deltaTime;
+
+            // 计算新的透明度
+            float newOpacity = Mathf.Lerp(startOpacity, targetOpacity, (float)(time / duration));
+
+            // 设置新的透明度
+            Color color = GetComponent<Renderer>().material.color;
+            color.a = newOpacity;
+            GetComponent<Renderer>().material.color = color;
+
+            yield return null; // 等待下一帧
+        }
     }
 
 }

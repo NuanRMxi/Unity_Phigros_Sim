@@ -52,6 +52,7 @@ public class LogWirte : MonoBehaviour
                     if (ChartCache.Instance.debugMode)
                     {
                         now = now + "[DEBUG-" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] " + msg;
+                        Debug.Log(msg);
                         break;
                     }
                     else
