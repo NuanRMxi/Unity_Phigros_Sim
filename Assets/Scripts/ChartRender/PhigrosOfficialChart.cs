@@ -268,7 +268,7 @@ public class ChartReader : MonoBehaviour
                         }
                         if (endTime >= 999999)
                         {
-                            endTime = startTime;
+                            endTime = startTime + 1000;
                         }
                         float xStartValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["start"]);//读取start为xStartValue
                         float xEndValue = CoordinateTransformer.TransformX((float)chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"][moveEventIndex]["end"]);//读取end为xEndValue
@@ -301,7 +301,7 @@ public class ChartReader : MonoBehaviour
                         }
                         if (endTime >= 999999)
                         {
-                            endTime = startTime;
+                            endTime = startTime + 1000;
                         }
                         float rotateStartValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["start"];//读取start为rotateStartValue
                         float rotateEndValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineRotateEvents"][rotateEventIndex]["end"];//读取end为rotateEndValue
@@ -325,7 +325,7 @@ public class ChartReader : MonoBehaviour
                         }
                         if (endTime >= 999999)
                         {
-                            endTime = startTime;
+                            endTime = startTime + 1000;
                         }
                         float alphaStartValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["start"];
                         float alphaEndValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["end"];

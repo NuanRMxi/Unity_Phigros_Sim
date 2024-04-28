@@ -49,7 +49,7 @@ public class MainBtnScrt : MonoBehaviour
             string TempFilePath = Application.dataPath + "/ChartTemp";
             LogWriter.Write("检测到当前为WINDOWS_DEBUG环境，当前缓存文件路径为：" + TempFilePath, LogWriter.LogType.Debug);
             //使用预设谱面文件
-            ChartZipFilePath.text = "D:\\PhiOfaChart\\A39sdy.zip";
+            ChartZipFilePath.text = "D:\\PhiOfaChart\\2023sdy.zip";
 #elif UNITY_ANDROID
             LogWriter.Write("检测当前环境为ANDROID，申请基础权限",LogWriter.LogType.Debug);
             RPR:
@@ -115,7 +115,9 @@ public class MainBtnScrt : MonoBehaviour
             {
                 var json = JSON.Parse(File.ReadAllText(TempFilePath + "/config.json"));
                 ChartReader.Chart chart = ChartReader.ChartConvert(TempFilePath + "/" + json["Chart"]);
-                AudioClip clip = Resources.Load<AudioClip>("116136");
+                byte[] data = File.ReadAllBytes(TempFilePath + "/" + json["Song"]);
+                AudioClip clip = ToAudioClip(data);
+                //AudioClip clip = Resources.Load<AudioClip>("116136");
                 clip.LoadAudioData();
                 //AudioClip clip = Resources.Load<AudioClip>("DHQ");
                 //chart.music = Resources.Load<AudioClip>(TempFilePath + "/" + json["Song"].ToString());
@@ -162,5 +164,24 @@ public class MainBtnScrt : MonoBehaviour
             //throw;
         }
         
+    }
+    AudioClip ToAudioClip(byte[] bytes)
+    {
+        // WAV文件的头部是44字节
+        int samples = (bytes.Length - 44) / 2; // 16-bit stereo
+
+        AudioClip clip = AudioClip.Create("MySound", samples, 2, 44100, false);
+        float[] data = new float[samples];
+
+        int offset = 44; // WAV头部
+        for (int i = 0; i < samples; i++)
+        {
+            data[i] = (short)(bytes[offset] | bytes[offset + 1] << 8) / 32768.0F;
+            offset += 2;
+        }
+
+        clip.SetData(data, 0);
+
+        return clip;
     }
 }
