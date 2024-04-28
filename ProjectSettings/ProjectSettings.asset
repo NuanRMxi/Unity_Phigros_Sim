@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: NuanR_Mxi
+  companyName: NuanR_Mxi_Lazy_Team
   productName: Phigros_Sim
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -137,7 +137,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: DEBUG-0.0.3-Dev-Alpha
+  bundleVersion: Beta-0.0.0-Dev
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0

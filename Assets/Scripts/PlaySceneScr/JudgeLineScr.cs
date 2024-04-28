@@ -7,6 +7,7 @@ public class JudgeLineScr : MonoBehaviour
     public double playStartUnixTime;
     public RectTransform rectTransform;
     public int whoami = 0;
+    public float speed = 16384f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +34,14 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (!(Index <= judgeLine.xMoves.Count - 1))
+            if (!(Index <= judgeLine.xMoveEventList.Count - 1))
             {
                 break;
             }
-            else if (startToNow >= judgeLine.xMoves[Index].startTime)
+            else if (startToNow >= judgeLine.xMoveEventList[Index].startTime)
             {
                 //设置判定线位置
-                StartCoroutine(MoveXOverTime(rectTransform, judgeLine.xMoves[Index].startValue, judgeLine.xMoves[Index].endValue, (float)(judgeLine.xMoves[Index].endTime - judgeLine.xMoves[Index].startTime) / 1000));
+                StartCoroutine(MoveXOverTime(rectTransform, judgeLine.xMoveEventList[Index].startValue, judgeLine.xMoveEventList[Index].endValue, (float)(judgeLine.xMoveEventList[Index].endTime - judgeLine.xMoveEventList[Index].startTime) / 1000));
                 Index++;
             }
             yield return null;
@@ -57,14 +58,14 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (!(Index <= judgeLine.yMoves.Count - 1))
+            if (!(Index <= judgeLine.yMoveEventList.Count - 1))
             {
                 break;
             }
-            else if (startToNow >= judgeLine.yMoves[Index].startTime)
+            else if (startToNow >= judgeLine.yMoveEventList[Index].startTime)
             {
                 //设置判定线位置
-                StartCoroutine(MoveYOverTime(rectTransform, judgeLine.yMoves[Index].startValue, judgeLine.yMoves[Index].endValue, (float)(judgeLine.yMoves[Index].endTime - judgeLine.yMoves[Index].startTime) / 1000));
+                StartCoroutine(MoveYOverTime(rectTransform, judgeLine.yMoveEventList[Index].startValue, judgeLine.yMoveEventList[Index].endValue, (float)(judgeLine.yMoveEventList[Index].endTime - judgeLine.yMoveEventList[Index].startTime) / 1000));
                 Index++;
             }
             yield return null;
@@ -81,14 +82,14 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (!(Index <= judgeLine.rotateChangeEvents.Count - 1))
+            if (!(Index <= judgeLine.rotateEventList.Count - 1))
             {
                 break;
             }
-            else if (startToNow >= judgeLine.rotateChangeEvents[Index].startTime)
+            else if (startToNow >= judgeLine.rotateEventList[Index].startTime)
             {
                 //设置判定线角度
-                StartCoroutine(RotateOverTime(rectTransform, judgeLine.rotateChangeEvents[Index].startValue, judgeLine.rotateChangeEvents[Index].endValue, (float)(judgeLine.rotateChangeEvents[Index].endTime - judgeLine.rotateChangeEvents[Index].startTime) / 1000));
+                StartCoroutine(RotateOverTime(rectTransform, judgeLine.rotateEventList[Index].startValue, judgeLine.rotateEventList[Index].endValue, (float)(judgeLine.rotateEventList[Index].endTime - judgeLine.rotateEventList[Index].startTime) / 1000));
                 Index++;
             }
             yield return null;
@@ -102,14 +103,14 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (!(Index <= judgeLine.disappearEvents.Count - 1))
+            if (!(Index <= judgeLine.AlphaEventList.Count - 1))
             {
                 break;
             }
-            else if (startToNow >= judgeLine.disappearEvents[Index].startTime)
+            else if (startToNow >= judgeLine.AlphaEventList[Index].startTime)
             {
                 //使判定线渐变
-                StartCoroutine(FadeTo(judgeLine.disappearEvents[Index].startValue, judgeLine.disappearEvents[Index].endValue,(judgeLine.disappearEvents[Index].endTime - judgeLine.disappearEvents[Index].startTime) / 1000));
+                StartCoroutine(FadeTo(judgeLine.AlphaEventList[Index].startValue, judgeLine.AlphaEventList[Index].endValue,(judgeLine.AlphaEventList[Index].endTime - judgeLine.AlphaEventList[Index].startTime) / 1000));
                 Index++;
             }
             yield return null;
@@ -161,11 +162,11 @@ public class JudgeLineScr : MonoBehaviour
     IEnumerator RotateOverTime(RectTransform rTf, float startRotate, float endRotate, float duration)
     {
         float startTime = Time.time;
-        //float counterClockwiseAngle = (360 - endRotate) % 360;
+        float deltaAngle = Mathf.DeltaAngle(startRotate, endRotate);
         while (Time.time < startTime + duration)
         {
             //rTf.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, startRotate), Quaternion.Euler(0, 0, counterClockwiseAngle), (Time.time - startTime) / duration);
-            rTf.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, startRotate), Quaternion.Euler(0, 0, endRotate), (Time.time - startTime) / duration);
+            rTf.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, startRotate), Quaternion.Euler(0, 0, startRotate + deltaAngle), (Time.time - startTime) / duration);
             yield return null;
         }
         rTf.transform.rotation = Quaternion.Euler(0, 0, endRotate);
@@ -176,7 +177,6 @@ public class JudgeLineScr : MonoBehaviour
     /// <param name="startOpacity"></param><summary>开始时的透明度</summary>
     /// <param name="targetOpacity"></param><summary>结束时的透明度</summary>
     /// <param name="duration"></param><summary>渐变时间（单位为秒）</summary>
-    /// <returns></returns>
     IEnumerator FadeTo(float startOpacity, float targetOpacity, double duration)
     {
         // 计算总时间
@@ -185,17 +185,32 @@ public class JudgeLineScr : MonoBehaviour
         {
             // 更新时间
             time += Time.deltaTime;
-
             // 计算新的透明度
             float newOpacity = Mathf.Lerp(startOpacity, targetOpacity, (float)(time / duration));
-
             // 设置新的透明度
             Color color = GetComponent<Renderer>().material.color;
             color.a = newOpacity;
             GetComponent<Renderer>().material.color = color;
-
             yield return null; // 等待下一帧
         }
     }
+    /// <summary>
+    /// 改变判定线全局流速
+    /// </summary>
+    /// <param name="startSpeed"></param><summary>开始时的流速</summary>
+    /// <param name="endSpeed"></param><summary>结束时的流速</summary>
+    /// <param name="duration"></param><summary>变速时长（单位为秒）</summary>
+    IEnumerator LerpSpeed(float startSpeed, float endSpeed, float duration)
+    {
+        float startTime = Time.time;
+        while (Time.time - startTime < duration)
+        {
+            float elapsed = Time.time - startTime;
+            speed = Mathf.Lerp(startSpeed, endSpeed, elapsed / duration);
+            yield return null;
+        }
 
+        // 确保speed变量达到结束数值
+        speed = endSpeed;
+    }
 }

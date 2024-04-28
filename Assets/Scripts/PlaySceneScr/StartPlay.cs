@@ -74,7 +74,7 @@ public class StartPlay : MonoBehaviour
         //获取当前unix时间戳，单位毫秒
         double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
         unixTime = unixTime + 10000f;
-        for (int i = 0; i < chart.judgeLines.Count; i++)
+        for (int i = 0; i < chart.judgeLineList.Count; i++)
         {
             // 实例化预制件，位置为 (0, 0, 0)，旋转为零旋转
             GameObject instance = Instantiate(JudgeLine);
@@ -96,7 +96,7 @@ public class StartPlay : MonoBehaviour
 
             // 设置脚本中的公共变量
             script.playStartUnixTime = unixTime;
-            script.judgeLine = chart.judgeLines[i];
+            script.judgeLine = chart.judgeLineList[i];
             script.whoami = i;
             //SpriteRenderer sprRend = instance.GetComponent<SpriteRenderer>();
             //sprRend.size = new Vector2(6220.8f, 8.11f);
