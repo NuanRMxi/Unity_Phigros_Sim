@@ -12,12 +12,6 @@ public class PAUScript : MonoBehaviour
     public Canvas rootCanvas;
     public Plane subPlane;
     public RectTransform rectTransform; // 需要适配的Canvas
-    //  FFFFFF   U    U    CCCCC     K   K
-    //  F        U    U    C         K K
-    //  FFFFFF   U    U    C         KK
-    //  F        U    U    C         K K
-    //  F        UUUUUU    CCCCC     K   K
-    //Unity我和你爆了
 
     void Start()
     {

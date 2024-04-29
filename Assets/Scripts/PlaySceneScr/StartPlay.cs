@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static ChartReader;
-using static UnityEditor.Progress;
 
 public class StartPlay : MonoBehaviour
 {
