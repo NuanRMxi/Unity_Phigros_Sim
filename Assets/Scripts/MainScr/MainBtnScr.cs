@@ -15,7 +15,7 @@ public class MainBtnScrt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Application.targetFrameRate = 1145141919;
     }
 
 

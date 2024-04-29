@@ -16,6 +16,7 @@ public class JudgeLineScr : MonoBehaviour
         StartCoroutine(judgeLineYEventReadAndMove());
         StartCoroutine(judgeLineREventReadAndMove());
         StartCoroutine(judgeLineDEventReadAndFade());
+        StartCoroutine(judgeLineSEventReadAndFade());
     }
 
     // Update is called once per frame
@@ -103,14 +104,36 @@ public class JudgeLineScr : MonoBehaviour
             //获取当前unix时间戳，单位毫秒
             double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
             double startToNow = unixTime - playStartUnixTime;
-            if (!(Index <= judgeLine.AlphaEventList.Count - 1))
+            if (!(Index <= judgeLine.alphaEventList.Count - 1))
             {
                 break;
             }
-            else if (startToNow >= judgeLine.AlphaEventList[Index].startTime)
+            else if (startToNow >= judgeLine.alphaEventList[Index].startTime)
             {
                 //使判定线渐变
-                StartCoroutine(FadeTo(judgeLine.AlphaEventList[Index].startValue, judgeLine.AlphaEventList[Index].endValue,(judgeLine.AlphaEventList[Index].endTime - judgeLine.AlphaEventList[Index].startTime) / 1000));
+                StartCoroutine(FadeTo(judgeLine.alphaEventList[Index].startValue, judgeLine.alphaEventList[Index].endValue,(judgeLine.alphaEventList[Index].endTime - judgeLine.alphaEventList[Index].startTime) / 1000));
+                Index++;
+            }
+            yield return null;
+        }
+    }
+    IEnumerator judgeLineSEventReadAndFade()
+    {
+        int Index = 0;
+        while (true)
+        {
+            //获取当前unix时间戳，单位毫秒
+            double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+            double startToNow = unixTime - playStartUnixTime;
+            if (!(Index <= judgeLine.speedEventList.Count - 1))
+            {
+                break;
+            }
+            else if (startToNow >= judgeLine.speedEventList[Index].startTime)
+            {
+                //使全局速度改变
+                //StartCoroutine(LerpSpeed(judgeLine.speedEventList[Index].startValue, judgeLine.speedEventList[Index].endValue, (judgeLine.speedEventList[Index].endTime - judgeLine.speedEventList[Index].startTime) / 1000));
+                speed = judgeLine.speedEventList[Index].startValue;
                 Index++;
             }
             yield return null;
@@ -200,16 +223,15 @@ public class JudgeLineScr : MonoBehaviour
     /// <param name="startSpeed"></param><summary>开始时的流速</summary>
     /// <param name="endSpeed"></param><summary>结束时的流速</summary>
     /// <param name="duration"></param><summary>变速时长（单位为秒）</summary>
-    IEnumerator LerpSpeed(float startSpeed, float endSpeed, float duration)
+    IEnumerator LerpSpeed(float startSpeed, float endSpeed, double duration)
     {
         float startTime = Time.time;
         while (Time.time - startTime < duration)
         {
             float elapsed = Time.time - startTime;
-            speed = Mathf.Lerp(startSpeed, endSpeed, elapsed / duration);
+            speed = Mathf.Lerp(startSpeed, endSpeed, (float)(elapsed / duration));
             yield return null;
         }
-
         // 确保speed变量达到结束数值
         speed = endSpeed;
     }

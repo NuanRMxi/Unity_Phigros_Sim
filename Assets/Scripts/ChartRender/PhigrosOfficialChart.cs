@@ -113,6 +113,26 @@ public class ChartReader : MonoBehaviour
             public float endValue { get; set; }
         }
         
+        public class SpeedEvent
+        {
+            /// <summary>
+            /// 改变速度开始时间
+            /// </summary>
+            public double startTime { get; set; }
+            /// <summary>
+            /// 改变速度结束时间
+            /// </summary>
+            public double endTime { get; set; }
+            /// <summary>
+            /// 即开始时的速度
+            /// </summary>
+            public float startValue { get; set; }
+            /// <summary>
+            /// 即结束时的速度
+            /// </summary>
+            public float endValue { get; set; }
+
+        }
     }
     /// <summary>
     /// 一个note
@@ -162,7 +182,11 @@ public class ChartReader : MonoBehaviour
         /// <summary>
         /// 所有不透明度事件
         /// </summary>
-        public List<ChartEvents.AlphaEvent> AlphaEventList { get; set; }
+        public List<ChartEvents.AlphaEvent> alphaEventList { get; set; }
+        /// <summary>
+        /// 所有速度事件
+        /// </summary>
+        public List<ChartEvents.SpeedEvent> speedEventList { get; set; }
         /// <summary>
         /// 所有音符
         /// </summary>
@@ -193,10 +217,14 @@ public class ChartReader : MonoBehaviour
     /// </summary>
     public class CoordinateTransformer
     {
-        private const float XMin = -675f;
-        private const float XMax = 675f;
-        private const float YMin = -450f;
-        private const float YMax = 450f;
+        //private const float XMin = -675f;
+        //private const float XMax = 675f;
+        //private const float YMin = -450f;
+        //private const float YMax = 450f;
+        private const float XMin = -960f;
+        private const float XMax = 960f;
+        private const float YMin = -540f;
+        private const float YMax = 540f;
         /// <summary>
         /// 提供官谱X坐标，返回Re:PhiEdit中的X坐标
         /// </summary>
@@ -260,7 +288,8 @@ public class ChartReader : MonoBehaviour
                     judgeLine.yMoveEventList = new List<ChartEvents.YMoveEvent>();//创建yMove列表
                     judgeLine.xMoveEventList = new List<ChartEvents.XMoveEvent>();//创建xMove列表
                     judgeLine.rotateEventList = new List<ChartEvents.RotateEvent>();//创建rotateChangeEvents列表
-                    judgeLine.AlphaEventList = new List<ChartEvents.AlphaEvent>();//创建disappearEvents列表
+                    judgeLine.alphaEventList = new List<ChartEvents.AlphaEvent>();//创建disappearEvents列表
+                    judgeLine.speedEventList = new List<ChartEvents.SpeedEvent>();//创建speedEvent列表
                     judgeLine.noteList = new List<Note>();//创建note列表
                     float judgeLineBPM = (float)chartJsonObject["judgeLineList"][i]["bpm"];//读取此判定线BPM，官谱中每条线一个BPM
                     for (int moveEventIndex = 0; moveEventIndex < chartJsonObject["judgeLineList"][i]["judgeLineMoveEvents"].Count; moveEventIndex++)//读取所有移动事件
@@ -341,32 +370,81 @@ public class ChartReader : MonoBehaviour
                             startValue = alphaStartValue,
                             endValue = alphaEndValue
                         };
-                        judgeLine.AlphaEventList.Add(disappearEvents);
+                        judgeLine.alphaEventList.Add(disappearEvents);
                     }
-                    LogWriter.Write("第" + (i + 1).ToString() + "线的Alpha事件转换结束，共有" + judgeLine.AlphaEventList.Count + "个Alpha事件", LogWriter.LogType.Debug);
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的Alpha事件转换结束，共有" + judgeLine.alphaEventList.Count + "个Alpha事件", LogWriter.LogType.Debug);
+                    for (int AlphaEventIndex = 0; AlphaEventIndex < chartJsonObject["judgeLineList"][i]["speedEvents"].Count; AlphaEventIndex++)
+                    {
+                        double startTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["speedEvents"][AlphaEventIndex]["startTime"], judgeLineBPM);
+                        double endTime = CalculateOriginalTime((double)chartJsonObject["judgeLineList"][i]["speedEvents"][AlphaEventIndex]["endTime"], judgeLineBPM);
+                        if (startTime <= 0)
+                        {
+                            startTime = 0;
+                        }
+                        if (endTime >= 999999)
+                        {
+                            endTime = startTime + 1000;
+                        }
+                        float speedStartValue = (float)chartJsonObject["judgeLineList"][i]["speedEvents"][AlphaEventIndex]["value"];
+                        float speedEndValue = (float)chartJsonObject["judgeLineList"][i]["judgeLineDisappearEvents"][AlphaEventIndex]["value"];
+                        ChartEvents.SpeedEvent speedEvent = new ChartEvents.SpeedEvent()
+                        {
+                            startTime = startTime,
+                            endTime = endTime,
+                            startValue = speedStartValue,
+                            endValue = speedEndValue
+                        };
+                        judgeLine.speedEventList.Add(speedEvent);
+                    }
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的Speed事件转换结束，共有" + judgeLine.speedEventList.Count + "个Speed事件", LogWriter.LogType.Debug);
                     for (int AboveNoteIndex = 0; AboveNoteIndex < chartJsonObject["judgeLineList"][i]["notesAbove"].Count; AboveNoteIndex++)
                     {
                         Note note = new Note();
-                        var noteJsonObject = JSON.Parse(chartJsonObject["judgeLineList"][i]["notesAbove"][AboveNoteIndex]);
+                        note.above = true;
+                        var noteJsonObject = chartJsonObject["judgeLineList"][i]["notesAbove"][AboveNoteIndex];
                         if (noteJsonObject["type"] != 3)
                         {
-                            note.noteType = noteJsonObject["type"];
-                            note.clickStartTime = CalculateOriginalTime(noteJsonObject["time"], judgeLineBPM);
+                            note.noteType = (int)noteJsonObject["type"];
+                            note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
                             note.clickEndTime = note.clickStartTime;
-                            note.X = CoordinateTransformer.TransformX(noteJsonObject["positionX"]);
-                            note.speedMultiplier = noteJsonObject["speed"];
+                            note.X = (float)noteJsonObject["positionX"] * 108f;
+                            note.speedMultiplier = (float)noteJsonObject["speed"];
                         }
                         else
                         {
                             note.noteType = 3;
-                            note.clickStartTime = CalculateOriginalTime(noteJsonObject["time"], judgeLineBPM);
-                            note.clickEndTime = CalculateOriginalTime(noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime(noteJsonObject["holeTime"], judgeLineBPM);
-                            note.X = CoordinateTransformer.TransformX(noteJsonObject["positionX"]);
-                            note.speedMultiplier = noteJsonObject["speed"];
+                            note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
+                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holeTime"], judgeLineBPM);
+                            note.X = (float)noteJsonObject["positionX"] * 108f;
+                            note.speedMultiplier = (float)noteJsonObject["speed"];
                         }
-                        LogWriter.Write("第" + (i + 1).ToString() + "线的Note转换结束，共有" + judgeLine.noteList.Count + "个Note", LogWriter.LogType.Debug);
                         judgeLine.noteList.Add(note);
                     }
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的下落Note转换结束，共有" + judgeLine.noteList.Count + "个下落Note", LogWriter.LogType.Debug);
+                    for (int BelowNoteIndex = 0; BelowNoteIndex < chartJsonObject["judgeLineList"][i]["notesBelow"].Count; BelowNoteIndex++)
+                    {
+                        Note note = new Note();
+                        note.above = false;
+                        var noteJsonObject = chartJsonObject["judgeLineList"][i]["notesBelow"][BelowNoteIndex];
+                        if (noteJsonObject["type"] != 3)
+                        {
+                            note.noteType = (int)noteJsonObject["type"];
+                            note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
+                            note.clickEndTime = note.clickStartTime;
+                            note.X = (float)noteJsonObject["positionX"] * 108f;
+                            note.speedMultiplier = (float)noteJsonObject["speed"];
+                        }
+                        else
+                        {
+                            note.noteType = 3;
+                            note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
+                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holeTime"], judgeLineBPM);
+                            note.X = (float)noteJsonObject["positionX"] * 108f;
+                            note.speedMultiplier = (float)noteJsonObject["speed"];
+                        }
+                        judgeLine.noteList.Add(note);
+                    }
+                    LogWriter.Write("第" + (i + 1).ToString() + "线的上落Note转换结束，共有" + judgeLine.noteList.Count + "个上落Note", LogWriter.LogType.Debug);
                     chart.judgeLineList.Add(judgeLine);
                 }
                 chart.chartVersion = (int)chartJsonObject["formatVersion"];
