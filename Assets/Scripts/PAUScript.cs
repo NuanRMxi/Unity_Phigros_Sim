@@ -32,7 +32,12 @@ public class PAUScript : MonoBehaviour
         rectTransform.sizeDelta = new Vector2((float)toWidth, 0);
         rectTransform.localScale.Set(1, 1, 1);
     }
+#if UNITY_EDITOR_WIN
+#elif UNITY_STANDALONE_WIN
+#elif UNITY_ANDROID
     bool isQuit = false;
+#endif
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
