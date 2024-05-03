@@ -7,7 +7,7 @@ public class JudgeLineScr : MonoBehaviour
     public double playStartUnixTime;
     public RectTransform rectTransform;
     public int whoami = 0;
-    public float speed = 16384f;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,7 @@ public class JudgeLineScr : MonoBehaviour
         StartCoroutine(judgeLineREventReadAndMove());
         StartCoroutine(judgeLineDEventReadAndFade());
         StartCoroutine(judgeLineSEventReadAndFade());
+        //speed = 1f;
     }
 
     // Update is called once per frame

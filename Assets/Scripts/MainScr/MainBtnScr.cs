@@ -51,6 +51,8 @@ public class MainBtnScrt : MonoBehaviour
             //使用预设谱面文件
             //ChartZipFilePath.text = "D:\\PhiOfaChart\\2023sdy.zip";
             ChartZipFilePath.text = "D:\\PhiOfaChart\\A39sdy.zip";
+            //ChartZipFilePath.text = "D:\\PhiOfaChart\\SMS.zip";
+            //ChartZipFilePath.text = "D:\\PhiOfaChart\\DHQ.zip";
 #elif UNITY_ANDROID
             LogWriter.Write("检测当前环境为ANDROID，申请基础权限",LogWriter.LogType.Debug);
             RPR:
@@ -167,24 +169,31 @@ public class MainBtnScrt : MonoBehaviour
         
     }
     /// <summary>
-    /// 读取bytes转为AudioClip
+    /// wav音频文件Bytes转为AudioClip
     /// </summary>
     /// <param name="bytes"></param>
-    /// <returns>bytes的音频剪辑</returns>
+    /// <returns>wav bytes的音频剪辑</returns>
     AudioClip ToAudioClip(byte[] bytes)
     {
-        // WAV文件的头部是44字节
-        int samples = (bytes.Length - 44) / 2; // 16-bit stereo
-        AudioClip clip = AudioClip.Create("MySound", samples, 2, 44100, false);
-        float[] data = new float[samples];
-
-        int offset = 44; // WAV头部
-        for (int i = 0; i < samples; i++)
+        try
         {
-            data[i] = (short)(bytes[offset] | bytes[offset + 1] << 8) / 32768.0F;
-            offset += 2;
+            // WAV文件的头部是44字节
+            int samples = (bytes.Length - 44) / 2; // 16-bit stereo
+            AudioClip clip = AudioClip.Create("MySound", samples, 2, 44100, false);
+            float[] data = new float[samples];
+
+            int offset = 44; // WAV头部
+            for (int i = 0; i < samples; i++)
+            {
+                data[i] = (short)(bytes[offset] | bytes[offset + 1] << 8) / 32768.0F;
+                offset += 2;
+            }
+            clip.SetData(data, 0);
+            return clip;
         }
-        clip.SetData(data, 0);
-        return clip;
+        catch (Exception)
+        {
+            return null;
+        }
     }
 }

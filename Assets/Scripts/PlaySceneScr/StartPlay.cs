@@ -78,27 +78,18 @@ public class StartPlay : MonoBehaviour
 
         //获取当前unix时间戳，单位毫秒
         double unixTime = System.DateTime.UtcNow.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
-        unixTime = unixTime + 10000f;
+        unixTime = unixTime + 3000f;
         for (int i = 0; i < chart.judgeLineList.Count; i++)
         {
-            // 实例化预制件，位置为 (0, 0, 0)，旋转为零旋转
+            // 生成判定线实例
             GameObject instance = Instantiate(JudgeLine);
-
-            // 找到父 GameObject
+            // 设置父对象为画布
             GameObject parent = GameObject.Find("Canvas");
-            // 将实例化的预制件设置为父 GameObject 的子对象
             instance.transform.SetParent(parent.transform);
-
-            // 设置实例化的预制件的位置
-            instance.transform.position = new Vector3(0, 0, 0f);
-
-            //设置预制件的位置位于画布中间
-            RectTransform prefabRectTransform = instance.GetComponent<RectTransform>();
-            prefabRectTransform.anchoredPosition = canvasRectTransform.rect.center;
-
+            // 设置判定线位置到画布正中间
+            instance.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
             // 获取预制件的脚本组件
             JudgeLineScr script = instance.GetComponent<JudgeLineScr>();
-
             // 设置脚本中的公共变量
             script.playStartUnixTime = unixTime;
             script.judgeLine = chart.judgeLineList[i];
@@ -107,59 +98,34 @@ public class StartPlay : MonoBehaviour
             //sprRend.size = new Vector2(6220.8f, 8.11f);
             for (int noteIndex = 0; noteIndex < chart.judgeLineList[i].noteList.Count; noteIndex++)
             {
-                if (chart.judgeLineList[i].noteList[noteIndex].noteType == 1)
+                GameObject note;
+                switch (chart.judgeLineList[i].noteList[noteIndex].noteType)
                 {
-                    GameObject Tnote = Instantiate(TapNote);
-                    Tnote.transform.SetParent(instance.transform);
-                    NotesScr TnScr = Tnote.GetComponent<NotesScr>();
-                    TnScr.above = chart.judgeLineList[i].noteList[noteIndex].above;
-                    TnScr.fatherJudgeLine = instance;
-                    TnScr.clickStartTime = chart.judgeLineList[i].noteList[noteIndex].clickStartTime;
-                    TnScr.speedMultiplier = chart.judgeLineList[i].noteList[noteIndex].speedMultiplier;
-                    TnScr.xValue = chart.judgeLineList[i].noteList[noteIndex].X;
-                    TnScr.playStartUnixTime = unixTime;
+                    case 1:
+                        note = Instantiate(TapNote);
+                        break;
+                    case 2:
+                        note = Instantiate(DragNote);
+                        break;
+                    case 3:
+                        note = Instantiate(HoldNote);
+                        break;
+                    case 4:
+                        note = Instantiate(FlickNote);
+                        break;
+                    default:
+                        throw new ArgumentException("不是Tap，不是Flick，不是Drag，不是Hold，你是谁？");
+                        //break;
                 }
-                else if (chart.judgeLineList[i].noteList[noteIndex].noteType == 2)
-                {
-                    GameObject Dnote = Instantiate(DragNote);
-                    Dnote.transform.SetParent(instance.transform);
-                    NotesScr DnScr = Dnote.GetComponent<NotesScr>();
-                    DnScr.above = chart.judgeLineList[i].noteList[noteIndex].above;
-                    DnScr.fatherJudgeLine = instance;
-                    DnScr.clickStartTime = chart.judgeLineList[i].noteList[noteIndex].clickStartTime;
-                    DnScr.speedMultiplier = chart.judgeLineList[i].noteList[noteIndex].speedMultiplier;
-                    DnScr.xValue = chart.judgeLineList[i].noteList[noteIndex].X;
-                    DnScr.playStartUnixTime = unixTime;
-                }
-                else if (chart.judgeLineList[i].noteList[noteIndex].noteType == 3)
-                {
-                    GameObject Hnote = Instantiate(DragNote);
-                    Hnote.transform.SetParent(instance.transform);
-                    NotesScr HnScr = Hnote.GetComponent<NotesScr>();
-                    HnScr.above = chart.judgeLineList[i].noteList[noteIndex].above;
-                    HnScr.fatherJudgeLine = instance;
-                    HnScr.clickStartTime = chart.judgeLineList[i].noteList[noteIndex].clickStartTime;
-                    HnScr.clickEndTime = chart.judgeLineList[i].noteList[noteIndex].clickEndTime;
-                    HnScr.speedMultiplier = chart.judgeLineList[i].noteList[noteIndex].speedMultiplier;
-                    HnScr.xValue = chart.judgeLineList[i].noteList[noteIndex].X;
-                    HnScr.playStartUnixTime = unixTime;
-                }
-                else if (chart.judgeLineList[i].noteList[noteIndex].noteType == 4)
-                {
-                    GameObject Fnote = Instantiate(DragNote);
-                    Fnote.transform.SetParent(instance.transform);
-                    NotesScr FnScr = Fnote.GetComponent<NotesScr>();
-                    FnScr.above = chart.judgeLineList[i].noteList[noteIndex].above;
-                    FnScr.fatherJudgeLine = instance;
-                    FnScr.clickStartTime = chart.judgeLineList[i].noteList[noteIndex].clickStartTime;
-                    FnScr.speedMultiplier = chart.judgeLineList[i].noteList[noteIndex].speedMultiplier;
-                    FnScr.xValue = chart.judgeLineList[i].noteList[noteIndex].X;
-                    FnScr.playStartUnixTime = unixTime;
-                }
-                else
-                {
-                    throw new ArgumentException("不是Tap，不是Flick，不是Drag，不是Hold，你是谁？");
-                }
+                note.transform.SetParent(instance.transform);//这段无法删减，如果此代码被删除，会导致note脱离判定线；如果在Note里设置父物体，则会导致报错null
+                NotesScr nScr = note.GetComponent<NotesScr>();
+                nScr.above = chart.judgeLineList[i].noteList[noteIndex].above;
+                nScr.playStartUnixTime = unixTime;
+                nScr.fatherJudgeLine = instance;
+                nScr.clickStartTime = chart.judgeLineList[i].noteList[noteIndex].clickStartTime;
+                nScr.clickEndTime = chart.judgeLineList[i].noteList[noteIndex].clickEndTime;
+                nScr.speedMultiplier = chart.judgeLineList[i].noteList[noteIndex].speedMultiplier;
+                nScr.xValue = chart.judgeLineList[i].noteList[noteIndex].X;
             }
         }
 #if UNITY_EDITOR

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Language_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: cd38eb13100e9cf419017852a6866761, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 120866201600
+    m_Localized: Load Chart to DataCache
+    m_Metadata:
+      m_Items: []
+  - m_Id: 453596143616
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 629454921728
+    m_Localized: About
+    m_Metadata:
+      m_Items: []
+  - m_Id: 812074917888
+    m_Localized: '*This software uses MiSans font and will comply with the MiSans
+      Font Intellectual Property License Agreement'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59574429147136
+    m_Localized: Type the path of the spectral compressed file
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265545965363200
+    m_Localized: NRLT_PhiSim
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -414,7 +414,7 @@ public class ChartReader : MonoBehaviour
                         {
                             note.noteType = 3;
                             note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
-                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holeTime"], judgeLineBPM);
+                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holdTime"], judgeLineBPM);
                             note.X = (float)noteJsonObject["positionX"] * 108f;
                             note.speedMultiplier = (float)noteJsonObject["speed"];
                         }
@@ -438,7 +438,7 @@ public class ChartReader : MonoBehaviour
                         {
                             note.noteType = 3;
                             note.clickStartTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM);
-                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holeTime"], judgeLineBPM);
+                            note.clickEndTime = CalculateOriginalTime((float)noteJsonObject["time"], judgeLineBPM) + CalculateOriginalTime((float)noteJsonObject["holdTime"], judgeLineBPM);
                             note.X = (float)noteJsonObject["positionX"] * 108f;
                             note.speedMultiplier = (float)noteJsonObject["speed"];
                         }

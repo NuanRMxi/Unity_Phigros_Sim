@@ -70,6 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+#不要在意下面这些，你敢问我我敢去砍你
 /.git
 /.plastic
 /[Aa]ssets/ChartTemp/*
+/[Aa]ssets/*.log

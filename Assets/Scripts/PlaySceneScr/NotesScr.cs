@@ -30,6 +30,9 @@ public class NotesScr : MonoBehaviour
 
     public float CalculateYPosition(double targetTime, float speed, double currentTime)
     {
+        //检查这是不是hold
+        bool isHold = clickStartTime != clickEndTime;
+
         // 计算已经过去的时间（单位：秒）
         double elapsedTime = currentTime / 1000;
 
@@ -37,7 +40,13 @@ public class NotesScr : MonoBehaviour
         double targetTimeInSeconds = targetTime / 1000;
 
         // 如果已经过去的时间大于目标时间，那么直接摧毁自己
-        if (elapsedTime >= targetTimeInSeconds)
+        if (elapsedTime >= clickEndTime / 1000 && isHold)
+        {
+            //直接摧毁自己
+            Destroy(gameObject);
+            return 1200;
+        }
+        else if (elapsedTime >= targetTimeInSeconds && !isHold)
         {
             //直接摧毁自己
             Destroy(gameObject);
@@ -45,9 +54,18 @@ public class NotesScr : MonoBehaviour
             //noteAlpha.a = 0;
             //GetComponent<Renderer>().material.color = noteAlpha;
         }
+        // 根据速度（像素/秒）计算y坐标
+        float yPosition = (float)(speed * ((clickStartTime / 1000) - elapsedTime) * 648); // 这里加入了速度单位648像素/秒
+        if (isHold)
+        {
+            yPosition += 1200f;
+        }
 
-        // 根据速度（像素/秒）计算y坐标，妈的你们怎么反着飞
-        float yPosition = (float)(speed * elapsedTime * 648); // 这里加入了速度单位648像素/秒
+        if (elapsedTime <= clickEndTime / 1000 && elapsedTime >= targetTimeInSeconds && isHold)
+        {
+            yPosition = 1200f;
+        }
+
 
         return yPosition;
     }

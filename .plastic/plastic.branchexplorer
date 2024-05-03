@@ -21,6 +21,6 @@ display.options.timesince=OneMonthAgo
 display.optionspanel.visible=false
 display.optionspanel.visibletabindex=0
 display.properties.legend=false
-display.properties.zoom=0.9
+display.properties.zoom=1.111111
 filters.conditional.numrules=0
 
