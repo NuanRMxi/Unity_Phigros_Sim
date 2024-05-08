@@ -3,8 +3,9 @@
 制作组：NuanR_Mxi Lazy Team<br>
 ~~不是就我一个人我写什么制作组~~<br>
 特别鸣谢：<br>
-Naptie, 不会特效の点缀星空，sjfhsjfh<br>
+Naptie,，sjfhsjfh<br>
 以及本开源项目所有贡献者<br>
+我爹：不会特效の点缀星空
 # 使用方法：
 输入完整压缩包路径（Windows从盘符开始输入，Android从根目录开始输入，~~你先别急，可视化文件选取在写的~~）<br>
 压缩包必须包含config.json<br>
